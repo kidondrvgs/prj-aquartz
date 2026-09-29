@@ -1,0 +1,416 @@
+/* ========================================
+   VARIABLES ET RESET
+======================================== */
+
+:root {
+    --yellow: #f2c230;
+    --yellow-hover: #dfae14;
+    --black: #242321;
+    --black-light: #343330;
+    --white: #ffffff;
+    --beige: #f5f2eb;
+    --grey: #c5c3be;
+    --border: #e8e6e1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--black);
+    background: var(--white);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+/* ========================================
+   CONTENEUR GENERAL
+======================================== */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+
+/* ========================================
+   LOGO AQUARTZ
+======================================== */
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--black);
+    flex-shrink: 0;
+}
+
+.brand-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--yellow);
+    color: var(--black);
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.brand-text strong {
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.brand-text small {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-top: 4px;
+}
+
+
+/* ========================================
+   NAVBAR
+======================================== */
+
+.site-header {
+    width: 100%;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    z-index: 10;
+}
+
+.navbar {
+    min-height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+/* Liens centraux */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: var(--black);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: #a77e00;
+}
+
+/* Connexion et inscription */
+
+.nav-account {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.nav-login {
+    color: var(--black);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+.nav-login:hover {
+    color: #a77e00;
+}
+
+.nav-register {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--yellow);
+    color: var(--black);
+    text-decoration: none;
+    padding: 11px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+}
+
+.nav-register:hover {
+    background: var(--yellow-hover);
+}
+
+
+/* ========================================
+   CONTENU PRINCIPAL
+======================================== */
+
+.main-content {
+    width: 100%;
+    flex: 1;
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.site-footer {
+    width: 100%;
+    background: var(--black);
+    color: var(--white);
+    padding: 55px 0 0;
+    margin-top: auto;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 45px;
+}
+
+/* Présentation */
+
+.footer-brand {
+    min-width: 0;
+}
+
+.footer-logo {
+    color: var(--white);
+}
+
+.footer-brand p {
+    max-width: 350px;
+    margin-top: 20px;
+    color: var(--grey);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* Navigation et contact */
+
+.footer-links,
+.footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+}
+
+.footer-links h3,
+.footer-contact h3 {
+    color: var(--yellow);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.footer-links a,
+.footer-contact a {
+    color: var(--grey);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover,
+.footer-contact a:hover {
+    color: var(--yellow);
+}
+
+.footer-contact p {
+    color: var(--grey);
+    font-size: 14px;
+}
+
+/* Copyright */
+
+.footer-bottom {
+    border-top: 1px solid #484744;
+    padding-top: 22px;
+    padding-bottom: 22px;
+}
+
+.footer-bottom p {
+    color: #aaa8a2;
+    font-size: 12px;
+}
+
+
+/* ========================================
+   RESPONSIVE : TABLETTES
+======================================== */
+
+@media (max-width: 1000px) {
+    .navbar {
+        gap: 20px;
+    }
+
+    .nav-links {
+        gap: 16px;
+    }
+
+    .nav-account {
+        gap: 10px;
+    }
+
+    .nav-links a,
+    .nav-login,
+    .nav-register {
+        font-size: 13px;
+    }
+
+    .footer-content {
+        gap: 35px;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE : PETITS ECRANS
+======================================== */
+
+@media (max-width: 760px) {
+    .navbar {
+        padding-top: 18px;
+        padding-bottom: 18px;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .nav-account {
+        margin-left: auto;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+}
+
+
+/* ========================================
+   RESPONSIVE : TELEPHONES
+======================================== */
+
+@media (max-width: 480px) {
+    .container {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .navbar {
+        gap: 16px;
+    }
+
+    .brand-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 22px;
+    }
+
+    .brand-text strong {
+        font-size: 16px;
+    }
+
+    .brand-text small {
+        font-size: 9px;
+    }
+
+    .nav-account {
+        gap: 12px;
+    }
+
+    .nav-register {
+        padding: 9px 11px;
+    }
+
+    .nav-links {
+        gap: 12px 18px;
+    }
+
+    .nav-links a,
+    .nav-login,
+    .nav-register {
+        font-size: 12px;
+    }
+
+    .site-footer {
+        padding-top: 40px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-bottom: 35px;
+    }
+
+    .footer-brand {
+        grid-column: auto;
+    }
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}AQUARTZ - Terrassement{% endblock %}</title>
+
+    <meta name="description" content="AQUARTZ, spécialiste du terrassement, des VRD et de l'aménagement extérieur.">
+
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}">
+
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+
+    {# ================= NAVBAR ================= #}
+    <header class="site-header">
+        <nav class="navbar container">
+
+            <a href="{{ path('app_accueil') }}" class="brand">
+                <span class="brand-icon">A</span>
+
+                <span class="brand-text">
+                    <strong>AQUARTZ</strong>
+                    <small>TERRASSEMENT</small>
+                </span>
+            </a>
+
+            <div class="nav-links">
+                <a href="{{ path('app_accueil') }}">Accueil</a>
+
+                <a href="{{ path('app_accueil') }}#prestations">
+                    Prestations
+                </a>
+
+                <a href="{{ path('app_accueil') }}#demande">
+                    Faire une demande
+                </a>
+            </div>
+
+            <div class="nav-account">
+                <a href="#" class="nav-login">Connexion</a>
+
+                <a href="#" class="nav-register">Inscription</a>
+            </div>
+
+        </nav>
+    </header>
+
+
+    {# ================= CONTENU DES PAGES ================= #}
+    <main class="main-content">
+        {% block body %}{% endblock %}
+    </main>
+
+
+    {# ================= FOOTER ================= #}
+    <footer class="site-footer">
+
+        <div class="footer-content container">
+
+            {# Présentation de l'entreprise #}
+            <div class="footer-brand">
+
+                <a href="{{ path('app_accueil') }}" class="brand footer-logo">
+                    <span class="brand-icon">A</span>
+
+                    <span class="brand-text">
+                        <strong>AQUARTZ</strong>
+                        <small>TERRASSEMENT</small>
+                    </span>
+                </a>
+
+                <p>
+                    Votre partenaire pour vos travaux de terrassement,
+                    de VRD et d'aménagement extérieur.
+                </p>
+
+            </div>
+
+
+            {# Liens de navigation #}
+            <div class="footer-links">
+
+                <h3>Navigation</h3>
+
+                <a href="{{ path('app_accueil') }}">Accueil</a>
+
+                <a href="{{ path('app_accueil') }}#prestations">
+                    Prestations
+                </a>
+
+                <a href="{{ path('app_accueil') }}#demande">
+                    Faire une demande
+                </a>
+
+            </div>
+
+
+            {# Contact #}
+            <div class="footer-contact">
+
+                <h3>Contact</h3>
+
+                <p>Vous avez un projet de travaux ?</p>
+
+                <a href="{{ path('app_accueil') }}#demande">
+                    Parlons de votre projet
+                </a>
+
+            </div>
+
+        </div>
+
+
+        {# Copyright #}
+        <div class="footer-bottom container">
+            <p>
+                © {{ "now"|date("Y") }} AQUARTZ.
+                Tous droits réservés.
+            </p>
+        </div>
+
+    </footer>
+
+</body>
+</html>
