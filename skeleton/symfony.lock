@@ -128,6 +128,7 @@
             "./config/routes.yaml"
         ]
     },
+<<<<<<< HEAD
     "symfony/security-bundle": {
         "version": "8.1",
         "recipe": {
@@ -141,6 +142,8 @@
             "./config/routes/security.yaml"
         ]
     },
+=======
+>>>>>>> feature/accueil
     "symfony/twig-bundle": {
         "version": "8.1",
         "recipe": {
@@ -153,6 +156,7 @@
             "./config/packages/twig.yaml",
             "./templates/base.html.twig"
         ]
+<<<<<<< HEAD
     },
     "symfony/validator": {
         "version": "8.1",
@@ -168,5 +172,7 @@
     },
     "symfonycasts/verify-email-bundle": {
         "version": "v1.18.0"
+=======
+>>>>>>> feature/accueil
     }
 }
