@@ -3,11 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\CustomerRequestRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CustomerRequestRepository::class)]
-class CustomerRequest
+
+class   CustomerRequest
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -43,6 +46,17 @@ class CustomerRequest
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $dateRequest = null;
+
+    /**
+     * @var Collection<int, Service>
+     */
+    #[ORM\ManyToMany(targetEntity: Service::class, mappedBy: 'fk_customerrequest')]
+    private Collection $services;
+
+    public function __construct()
+    {
+        $this->services = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -165,6 +179,33 @@ class CustomerRequest
     public function setDateRequest(\DateTime $dateRequest): static
     {
         $this->dateRequest = $dateRequest;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Service>
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(Service $service): static
+    {
+        if (!$this->services->contains($service)) {
+            $this->services->add($service);
+            $service->addFkCustomerRequest($this);
+        }
+
+        return $this;
+    }
+
+    public function removeService(Service $service): static
+    {
+        if ($this->services->removeElement($service)) {
+            $service->removeFkCustomerRequest($this);
+        }
 
         return $this;
     }

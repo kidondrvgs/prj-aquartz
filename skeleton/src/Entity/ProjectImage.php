@@ -25,6 +25,10 @@ class ProjectImage
     #[ORM\Column]
     private ?bool $isMain = null;
 
+    #[ORM\ManyToOne(inversedBy: 'projectImages')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Project $FkProject = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +78,18 @@ class ProjectImage
     public function setIsMain(bool $isMain): static
     {
         $this->isMain = $isMain;
+
+        return $this;
+    }
+
+    public function getFkProject(): ?Project
+    {
+        return $this->FkProject;
+    }
+
+    public function setFkProject(?Project $FkProject): static
+    {
+        $this->FkProject = $FkProject;
 
         return $this;
     }
