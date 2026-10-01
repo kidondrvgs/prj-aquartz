@@ -38,11 +38,11 @@ class CustomerRequest
     #[ORM\Column]
     private ?int $surface = null;
 
-    #[ORM\Column (type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTime $dateReq = null;
+    private ?\DateTime $dateRequest = null;
 
     public function getId(): ?int
     {
@@ -129,6 +129,42 @@ class CustomerRequest
     public function setStatus(string $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getSurface(): ?int
+    {
+        return $this->surface;
+    }
+
+    public function setSurface(int $surface): static
+    {
+        $this->surface = $surface;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDateRequest(): ?\DateTime
+    {
+        return $this->dateRequest;
+    }
+
+    public function setDateRequest(\DateTime $dateRequest): static
+    {
+        $this->dateRequest = $dateRequest;
 
         return $this;
     }
