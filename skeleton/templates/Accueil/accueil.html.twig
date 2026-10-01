@@ -2,18 +2,129 @@
 
 {% block title %}Accueil - AQUARTZ Terrassement{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
+{% endblock %}
+
 {% block body %}
 
-    {# Première section de la page d'accueil #}
-    <section style="padding: 100px 20px; text-align: center;">
+    {# ================= HERO ================= #}
+    <section class="hero">
+        <div class="hero-content">
+            <p class="hero-eyebrow">Entreprise de terrassement · Normandie</p>
 
-        <h1>Bienvenue chez AQUARTZ</h1>
+            <h1 class="hero-title">
+                Terrassement, VRD et <span>aménagements</span> extérieurs
+            </h1>
 
-        <p>
-            Votre partenaire pour vos projets de terrassement
-            et d'aménagement.
-        </p>
+            <p class="hero-text">
+                AQUARTZ – TERRASSEMENT accompagne particuliers et professionnels,
+                de la préparation du terrain jusqu'à la finition : décaissement,
+                tranchées, assainissement, plateformes.
+            </p>
 
+            <div class="hero-buttons">
+                <a href="#prestations" class="btn btn-yellow">Voir nos prestations</a>
+                <a href="#demande" class="btn btn-white">Faire une demande</a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+            <img src="{{ asset('images/hero-terrassement.jpg') }}" alt="Pelle mécanique sur chantier de terrassement">
+        </div>
+    </section>
+
+
+    {# ================= PRESENTATION ================= #}
+    <section class="about">
+        <div class="about-text">
+            <h2>Un savoir-faire de terrain depuis 2004</h2>
+            <p>
+                Notre équipe intervient sur des chantiers de toutes tailles avec
+                du matériel récent et des conducteurs d'engins expérimentés.
+                Devis clair, délais tenus, terrain remis propre.
+            </p>
+        </div>
+
+        <div class="about-stats">
+            <div class="stat">
+                <span class="stat-number">20+</span>
+                <span class="stat-label">ans d'expérience</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">1 200</span>
+                <span class="stat-label">chantiers réalisés</span>
+            </div>
+            <div class="stat">
+                <span class="stat-number">15</span>
+                <span class="stat-label">collaborateurs</span>
+            </div>
+        </div>
+    </section>
+
+
+    {# ================= PRESTATIONS ================= #}
+    <section class="prestations" id="prestations">
+        <div class="prestations-header">
+            <h2>Nos prestations</h2>
+            <a href="#" class="link-arrow">Voir toutes les prestations →</a>
+        </div>
+
+        
+        <div class="prestations-grid">
+
+            <article class="card">
+                <div class="card-image">
+                    <img
+                        src="{{ asset('images/terrassement.jpg') }}"alt="Pelleteuse en train de réaliser des travaux de terrassement">
+                </div>
+                <div class="card-body">
+                    <h3>Terrassement</h3>
+                    <p>Préparation du terrain, nivellement, excavation et mise à niveau des plateformes.</p>
+                    <a href="#" class="link-arrow">En savoir plus →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <img src="{{ asset('images/assainissement.jpg') }}" alt="Travaux d'assainissement et pose de canalisations">
+                </div>
+                <div class="card-body">
+                    <h3>Assainissement</h3>
+                    <p>Installation de réseaux d’évacuation, drainage des eaux et raccordement aux réseaux existants.</p>
+                    <a href="#" class="link-arrow">En savoir plus →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <img src="{{ asset('images/demolition.jpg') }}" alt="Pelleteuse réalisant des travaux de démolition">
+                </div>
+                <div class="card-body">
+                    <h3>Démolition</h3>
+                    <p>Déconstruction de petits bâtiments, démolition de murets et retrait de dalles en béton.</p>
+                    <a href="#" class="link-arrow">En savoir plus →</a>
+                </div>
+            </article>
+
+            <article class="card">
+                <div class="card-image">
+                    <img src="{{ asset('images/amenagement-exterieur.jpg') }}" alt="Pose de pavés pour aménager une allée extérieure">
+                </div>
+                <div class="card-body">
+                    <h3>Aménagement extérieur</h3>
+                    <p>Création d’allées, aménagement de cours, pose de revêtements et préparation des accès.</p>
+                    <a href="#" class="link-arrow">En savoir plus →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+
+    {# ================= CTA ================= #}
+    <section class="cta" id="demande">
+        <p>Un projet de terrassement ? Décrivez-le en ligne, nous vous répondons sous 48 h.</p>
+        <a href="#" class="btn btn-black">Faire une demande</a>
     </section>
 
 {% endblock %}

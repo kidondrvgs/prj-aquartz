@@ -3,14 +3,16 @@
 ======================================== */
 
 :root {
-    --yellow: #f2c230;
-    --yellow-hover: #dfae14;
-    --black: #242321;
-    --black-light: #343330;
+    --yellow: #f5b800;
+    --yellow-hover: #d9a400;
+    --black: #1a1a1a;
+    --black-light: #2a2a2a;
     --white: #ffffff;
-    --beige: #f5f2eb;
-    --grey: #c5c3be;
-    --border: #e8e6e1;
+    --beige: #f6f1e9;
+    --grey: #c7c7c7;
+    --border: #e0d9cc;
+    --brown: #6b4423;
+    --text-muted: #5c5c5c;
 }
 
 * {
@@ -25,7 +27,7 @@ html {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
     color: var(--black);
     background: var(--white);
     line-height: 1.6;
@@ -71,42 +73,28 @@ img {
 .brand {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
     text-decoration: none;
-    color: var(--black);
     flex-shrink: 0;
 }
 
-.brand-icon {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--yellow);
-    color: var(--black);
-    font-size: 25px;
-    font-weight: 800;
-    line-height: 1;
+.brand-logo {
+    height: 112px;
+    width: auto;
 }
 
-.brand-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.2;
+/* Sur le footer, le fond est noir : on remet le logo sur une carte
+   blanche pour qu'il reste lisible (le PNG a un fond clair). */
+.footer-logo {
+    display: inline-flex;
+    background: var(--white);
+    border-radius: 10px;
+    padding: 8px 14px;
+    width: fit-content;
 }
 
-.brand-text strong {
-    font-size: 19px;
-    font-weight: 800;
-    letter-spacing: 1px;
-}
-
-.brand-text small {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    margin-top: 4px;
+.footer-logo img {
+    height: 90px;
+    width: auto;
 }
 
 
@@ -149,7 +137,7 @@ img {
 }
 
 .nav-links a:hover {
-    color: #a77e00;
+    color: var(--brown);
 }
 
 /* Connexion et inscription */
@@ -171,7 +159,7 @@ img {
 }
 
 .nav-login:hover {
-    color: #a77e00;
+    color: var(--brown);
 }
 
 .nav-register {
@@ -182,6 +170,7 @@ img {
     color: var(--black);
     text-decoration: none;
     padding: 11px 18px;
+    border-radius: 6px;
     font-size: 14px;
     font-weight: 700;
     white-space: nowrap;
@@ -226,15 +215,13 @@ img {
 
 .footer-brand {
     min-width: 0;
-}
-
-.footer-logo {
-    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
 .footer-brand p {
     max-width: 350px;
-    margin-top: 20px;
     color: var(--grey);
     font-size: 14px;
     line-height: 1.8;
@@ -255,6 +242,7 @@ img {
     color: var(--yellow);
     font-size: 16px;
     font-weight: 700;
+    letter-spacing: .5px;
     margin-bottom: 8px;
 }
 
@@ -279,7 +267,7 @@ img {
 /* Copyright */
 
 .footer-bottom {
-    border-top: 1px solid #484744;
+    border-top: 1px solid #3a3a38;
     padding-top: 22px;
     padding-bottom: 22px;
 }
@@ -368,18 +356,8 @@ img {
         gap: 16px;
     }
 
-    .brand-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 22px;
-    }
-
-    .brand-text strong {
-        font-size: 16px;
-    }
-
-    .brand-text small {
-        font-size: 9px;
+    .brand-logo {
+        height: 44px;
     }
 
     .nav-account {
