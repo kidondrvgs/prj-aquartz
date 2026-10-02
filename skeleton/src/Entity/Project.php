@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,6 +39,21 @@ class Project
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $dateCompletion = null;
+
+    #[ORM\ManyToOne(inversedBy: 'projects')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Service $FkService = null;
+
+    /**
+     * @var Collection<int, ProjectImage>
+     */
+    #[ORM\OneToMany(targetEntity: ProjectImage::class, mappedBy: 'FkProject')]
+    private Collection $projectImages;
+
+    public function __construct()
+    {
+        $this->projectImages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -135,6 +152,48 @@ class Project
     public function setDateCompletion(\DateTime $dateCompletion): static
     {
         $this->dateCompletion = $dateCompletion;
+
+        return $this;
+    }
+
+    public function getFkService(): ?Service
+    {
+        return $this->FkService;
+    }
+
+    public function setFkService(?Service $FkService): static
+    {
+        $this->FkService = $FkService;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProjectImage>
+     */
+    public function getProjectImages(): Collection
+    {
+        return $this->projectImages;
+    }
+
+    public function addProjectImage(ProjectImage $projectImage): static
+    {
+        if (!$this->projectImages->contains($projectImage)) {
+            $this->projectImages->add($projectImage);
+            $projectImage->setFkProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjectImage(ProjectImage $projectImage): static
+    {
+        if ($this->projectImages->removeElement($projectImage)) {
+            // set the owning side to null (unless already changed)
+            if ($projectImage->getFkProject() === $this) {
+                $projectImage->setFkProject(null);
+            }
+        }
 
         return $this;
     }
