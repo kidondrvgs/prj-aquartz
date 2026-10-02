@@ -920,7 +920,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     enable_profiler?: bool|Param, // Whether or not to enable the profiler collector to calculate and visualize migration status. This adds some queries overhead. // Default: false
  *     transactional?: bool|Param, // Whether or not to wrap migrations in a single transaction. // Default: true
  * }
-<<<<<<< HEAD
  * @psalm-type SecurityConfig = array{
  *     access_denied_url?: scalar|Param|null, // Default: null
  *     session_fixation_strategy?: "none"|"migrate"|"invalidate"|Param, // Default: "migrate"
@@ -1233,8 +1232,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  * @psalm-type SymfonycastsVerifyEmailConfig = array{
  *     lifetime?: int|Param, // The length of time in seconds that a signed URI is valid for after it is created. // Default: 3600
  * }
-=======
->>>>>>> feature/accueil
  * @psalm-type TwigConfig = array{
  *     form_themes?: list<scalar|Param|null>,
  *     globals?: array<string, array{ // Default: []
@@ -1275,11 +1272,8 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     framework?: FrameworkConfig,
  *     doctrine?: DoctrineConfig,
  *     doctrine_migrations?: DoctrineMigrationsConfig,
-<<<<<<< HEAD
  *     security?: SecurityConfig,
  *     symfonycasts_verify_email?: SymfonycastsVerifyEmailConfig,
-=======
->>>>>>> feature/accueil
  *     twig?: TwigConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
@@ -1289,11 +1283,8 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         maker?: MakerConfig,
  *         doctrine?: DoctrineConfig,
  *         doctrine_migrations?: DoctrineMigrationsConfig,
-<<<<<<< HEAD
  *         security?: SecurityConfig,
  *         symfonycasts_verify_email?: SymfonycastsVerifyEmailConfig,
-=======
->>>>>>> feature/accueil
  *         twig?: TwigConfig,
  *     },
  *     "when@prod"?: array{
@@ -1303,11 +1294,8 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         framework?: FrameworkConfig,
  *         doctrine?: DoctrineConfig,
  *         doctrine_migrations?: DoctrineMigrationsConfig,
-<<<<<<< HEAD
  *         security?: SecurityConfig,
  *         symfonycasts_verify_email?: SymfonycastsVerifyEmailConfig,
-=======
->>>>>>> feature/accueil
  *         twig?: TwigConfig,
  *     },
  *     "when@test"?: array{
@@ -1317,11 +1305,8 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         framework?: FrameworkConfig,
  *         doctrine?: DoctrineConfig,
  *         doctrine_migrations?: DoctrineMigrationsConfig,
-<<<<<<< HEAD
  *         security?: SecurityConfig,
  *         symfonycasts_verify_email?: SymfonycastsVerifyEmailConfig,
-=======
->>>>>>> feature/accueil
  *         twig?: TwigConfig,
  *     },
  *     ...<string, ExtensionType|array{ // extra keys must follow the when@%env% pattern or match an extension alias

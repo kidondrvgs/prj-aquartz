@@ -43,9 +43,12 @@
 
             <div class="nav-account">
                 {# À remplacer par path('app_login') / path('app_register') une fois ces routes créées #}
-                <a href="#" class="nav-login">Connexion</a>
-
-                <a href="#" class="nav-register">Inscription</a>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('app_logout') }}" class="nav-login">Déconnexion</a>
+                {% else %}
+                <a href="{{ path('app_login') }}" class="nav-login">Connexion</a>
+                {% endif %}
+                <a href="{{ path('app_register') }}" class="nav-register">Inscription</a>
             </div>
 
         </nav>
