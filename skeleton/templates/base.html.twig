@@ -42,7 +42,6 @@
             </div>
 
             <div class="nav-account">
-                {# À remplacer par path('app_login') / path('app_register') une fois ces routes créées #}
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a href="{{ path('app_logout') }}" class="nav-login">Déconnexion</a>
                 {% else %}
