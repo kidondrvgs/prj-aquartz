@@ -1,0 +1,23 @@
+.prestations-list {
+    padding: 64px 80px;
+}
+ 
+.prestations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+ 
+.prestations-grid .card-image { height: 170px; }
+ 
+@media (max-width: 1100px) {
+    .prestations-grid { grid-template-columns: repeat(2, 1fr); }
+}
+ 
+@media (max-width: 960px) {
+    .prestations-list { padding-left: 32px; padding-right: 32px; }
+}
+ 
+@media (max-width: 680px) {
+    .prestations-grid { grid-template-columns: 1fr; }
+}
