@@ -44,6 +44,7 @@
     display: flex;
     align-items: center;
     gap: 64px;
+    justify-content: space-between;
     padding: 72px 80px;
     background: var(--black);
     color: var(--white);
@@ -89,9 +90,8 @@
 }
 
 .hero-image {
-    flex: 1 1 000px;
+    flex: 1 1 400px;
     max-width: 576px;
-    margin-left: 450px;
 }
 
 .hero-image img {

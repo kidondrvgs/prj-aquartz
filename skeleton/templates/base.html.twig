@@ -15,6 +15,9 @@
 
     <link rel="stylesheet" href="{{ asset('css/base.css') }}">
 
+    {# Composants réutilisables (boutons, cartes, en-têtes de page) partagés par toutes les pages #}
+    <link rel="stylesheet" href="{{ asset('css/Components.css') }}">
+
     {% block stylesheets %}{% endblock %}
 </head>
 
@@ -31,7 +34,7 @@
             <div class="nav-links">
                 <a href="{{ path('app_accueil') }}">Accueil</a>
 
-                <a href="{{ path('app_prestations') }}#prestations">
+                <a href="{{ path('app_prestations') }}">
                     Prestations
                 </a>
 
@@ -84,7 +87,7 @@
 
                 <a href="{{ path('app_accueil') }}">Accueil</a>
 
-                <a href="{{ path('app_accueil') }}#prestations">
+                <a href="{{ path('app_prestations') }}">
                     Prestations
                 </a>
 
