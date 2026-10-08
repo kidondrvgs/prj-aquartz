@@ -1,0 +1,102 @@
+/* ========================================
+   PAGE NOUVELLE DEMANDE
+======================================== */
+
+.demande-section {
+    background: var(--beige);
+    padding: 0 80px 72px;
+}
+
+
+/* ========================================
+   2 COLONNES : FORMULAIRE + ENCADRE NOIR
+======================================== */
+
+.demande-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+
+/* ========================================
+   CARTE BLANCHE DU FORMULAIRE
+======================================== */
+
+.demande-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.demande-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* messages d'erreur sous les champs */
+.field ul {
+    list-style: none;
+    font-size: 13px;
+    color: #8a1c12;
+}
+
+
+/* ========================================
+   COMMENT CA MARCHE
+======================================== */
+
+.demande-help {
+    background: var(--black);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.demande-help h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.help-steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.help-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+}
+
+/* rond jaune avec le numéro */
+.step-number {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--black);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 960px) {
+    .demande-section { padding-left: 32px; padding-right: 32px; }
+    .demande-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle demande - AQUARTZ Terrassement{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/nouvelle-demande.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    {# ================= EN-TETE ================= #}
+    <section class="page-header">
+        <p class="breadcrumb"><a href="{{ path('app_accueil') }}">Accueil</a>  /  Nouvelle demande</p>
+        <h1>Nouvelle demande</h1>
+    </section>
+
+    <section class="demande-section">
+
+        {# Message après l'envoi #}
+        {% for message in app.flashes('success') %}
+            <p class="form-success">{{ message }}</p>
+        {% endfor %}
+
+        <div class="demande-grid">
+
+            {# ================= FORMULAIRE ================= #}
+            <div class="demande-card">
+
+                {# novalidate : c'est Symfony qui vérifie les champs, pas le navigateur #}
+                {{ form_start(form, {attr: {novalidate: 'novalidate', class: 'demande-form'}}) }}
+
+                    <div class="field">
+                        {{ form_label(form.prestation) }}
+                        {{ form_widget(form.prestation) }}
+                        {{ form_errors(form.prestation) }}
+                    </div>
+
+                    <div class="field">
+                        {{ form_label(form.description) }}
+                        {{ form_widget(form.description) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+
+                    {# Date et surface côte à côte #}
+                    <div class="field-row">
+                        <div class="field">
+                            {{ form_label(form.dateRequest) }}
+                            {{ form_widget(form.dateRequest) }}
+                            {{ form_errors(form.dateRequest) }}
+                        </div>
+
+                        <div class="field">
+                            {{ form_label(form.surface) }}
+                            {{ form_widget(form.surface) }}
+                            {{ form_errors(form.surface) }}
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        {{ form_label(form.location) }}
+                        {{ form_widget(form.location) }}
+                        {{ form_errors(form.location) }}
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-yellow">Envoyer ma demande</button>
+                        <a href="{{ path('app_prestations') }}" class="btn btn-outline">Annuler</a>
+                    </div>
+
+                {{ form_end(form) }}
+
+            </div>
+
+
+            {# ================= COMMENT CA MARCHE ================= #}
+            <aside class="demande-help">
+                <h2>Comment ça marche ?</h2>
+
+                <ol class="help-steps">
+                    <li>
+                        <span class="step-number">1</span>
+                        <p>Vous décrivez votre besoin et choisissez une prestation.</p>
+                    </li>
+                    <li>
+                        <span class="step-number">2</span>
+                        <p>Nous étudions votre demande et vous répondons sous 48 h.</p>
+                    </li>
+                    <li>
+                        <span class="step-number">3</span>
+                        <p>Suivez le statut dans « Mes demandes ».</p>
+                    </li>
+                </ol>
+            </aside>
+
+        </div>
+
+    </section>
+
+{% endblock %}
