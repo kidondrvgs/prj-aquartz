@@ -47,7 +47,7 @@ class CustomerRequestType extends AbstractType
                 ],
             ])
 
-            // single_text = un seul champ date (jj/mm/aaaa)
+            // Un seul champ pour la date
             ->add('dateRequest', DateType::class, [
                 'label' => 'Date souhaitée *',
                 'widget' => 'single_text',
@@ -67,7 +67,7 @@ class CustomerRequestType extends AbstractType
             ])
 
             // Adresse complète : numéro, rue, code postal (5 chiffres) puis ville
-            // \p{L} = une lettre (accents compris, pour Évreux par exemple)
+            // \p{L} = une lettre, même avec un accent
             ->add('location', TextType::class, [
                 'label' => 'Adresse du chantier *',
                 'attr' => ['placeholder' => 'N° et rue, code postal, ville'],

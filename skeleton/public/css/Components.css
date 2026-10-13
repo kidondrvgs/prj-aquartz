@@ -35,7 +35,7 @@
 
 
 /* ========================================
-   CARTES (prestations, etc.)
+   CARTES
 ======================================== */
 
 .card {
@@ -69,7 +69,7 @@
 
 
 /* ========================================
-   EN-TETE DE PAGE (bandeau beige avec fil d'ariane + titre)
+   EN-TETE DE PAGE
 ======================================== */
 
 .page-header {
@@ -96,6 +96,20 @@
     color: var(--text-muted);
     font-size: 17px;
     max-width: 700px;
+}
+
+
+/* ========================================
+   FIL D'ARIANE
+======================================== */
+
+.breadcrumb a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
 }
 
 
@@ -162,7 +176,7 @@
     font-size: 14px;
 }
 
-/* message de confirmation */
+/* Message de confirmation */
 .form-success {
     background: #dff3e4;
     color: #1d5e2f;
@@ -255,7 +269,7 @@
 
 
 /* ========================================
-   FILTRES (chips)
+   FILTRES
 ======================================== */
 
 .filters { display: flex; gap: 10px; flex-wrap: wrap; }
@@ -273,7 +287,7 @@
 
 
 /* ========================================
-   TABLEAU (listes de demandes)
+   TABLEAU
 ======================================== */
 
 .table-wrap {
@@ -303,7 +317,7 @@
 
 
 /* ========================================
-   LIGNES CLE / VALEUR (détail d'une demande)
+   LIGNES CLE / VALEUR
 ======================================== */
 
 .kv-row {
