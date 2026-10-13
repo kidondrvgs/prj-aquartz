@@ -13,7 +13,7 @@ final class AccueilController extends AbstractController
     #[Route('/', name: 'app_accueil')]
     public function index(ServiceRepository $serviceRepository): Response
     {
-        // findBy(critères, tri, nombre max)
+        // On récupère 4 prestations
         $prestations = $serviceRepository->findBy([], ['id' => 'ASC'], 4);
 
         return $this->render('Accueil/accueil.html.twig', [

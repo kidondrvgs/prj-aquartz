@@ -35,7 +35,7 @@
     gap: 16px;
 }
 
-/* La colonne de droite est étroite : les clés passent au-dessus des valeurs */
+/* Colonne de droite : le titre au-dessus de la valeur */
 .detail-aside .kv-key {
     flex-basis: 100%;
 }
