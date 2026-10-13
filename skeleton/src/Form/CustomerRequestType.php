@@ -57,12 +57,11 @@ class CustomerRequestType extends AbstractType
                 ],
             ])
 
-            // Pas obligatoire
             ->add('surface', IntegerType::class, [
-                'label' => 'Surface concernée (m²)',
-                'required' => false,
+                'label' => 'Surface concernée (m²) *',
                 'attr' => ['placeholder' => 'Ex : 250'],
                 'constraints' => [
+                    new NotBlank(message: 'Indiquez la surface.'),
                     new Positive(message: 'La surface doit être un nombre positif.'),
                 ],
             ])
