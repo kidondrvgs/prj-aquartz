@@ -82,8 +82,7 @@ img {
     width: auto;
 }
 
-/* Sur le footer, le fond est noir : on remet le logo sur une carte
-   blanche pour qu'il reste lisible (le PNG a un fond clair). */
+/* Fond blanc derrière le logo pour qu'il reste lisible */
 .footer-logo {
     display: inline-flex;
     background: var(--white);

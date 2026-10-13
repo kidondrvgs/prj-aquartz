@@ -1,42 +1,4 @@
 /* ========================================
-   BOUTONS (utilisés uniquement sur l'accueil pour l'instant)
-======================================== */
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 14px 26px;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 15px;
-    border: 1.5px solid transparent;
-    text-decoration: none;
-    cursor: pointer;
-    transition: opacity 0.15s ease;
-}
-
-.btn:hover {
-    opacity: 0.85;
-}
-
-.btn-yellow { background: var(--yellow); color: var(--black); }
-.btn-black  { background: var(--black); color: var(--white); }
-.btn-white  { background: transparent; border-color: var(--white); color: var(--white); }
-
-.link-arrow {
-    font-weight: 600;
-    font-size: 15px;
-    text-decoration: none;
-    color: var(--black);
-}
-
-.link-arrow:hover {
-    color: var(--brown);
-}
-
-
-/* ========================================
    HERO
 ======================================== */
 
@@ -183,51 +145,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 24px;
-}
-
-.card {
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    background: var(--white);
-}
-
-.card-image {
-    height: 150px;
-    background: #dbc9ab;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.card-image span {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--brown);
-}
-
-.card-body {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.card-body h3 {
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.card-body p {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.45;
 }
 
 
