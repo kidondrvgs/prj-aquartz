@@ -2,13 +2,16 @@
 
 namespace App\Form;
 
+use App\Entity\CustomerRequest;
+use App\Entity\Service;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
@@ -20,19 +23,14 @@ class CustomerRequestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // Prestations écrites en dur pour l'instant
-            // À gauche le texte affiché, à droite la valeur envoyée
-            ->add('prestation', ChoiceType::class, [
+            // Liste des prestations prise dans la table service
+            // mapped false : pas de propriété "prestation" dans l'entité, on la gère dans le contrôleur
+            ->add('prestation', EntityType::class, [
+                'class' => Service::class,
+                'choice_label' => 'title',
+                'mapped' => false,
                 'label' => 'Prestation *',
                 'placeholder' => 'Choisir une prestation',
-                'choices' => [
-                    'Terrassement général' => 'terrassement',
-                    'Assainissement' => 'assainissement',
-                    'Tranchées et réseaux' => 'tranchees',
-                    'Démolition' => 'demolition',
-                    'Aménagement extérieur' => 'amenagement-exterieur',
-                    'Location de pelle avec chauffeur' => 'location-pelle',
-                ],
                 'constraints' => [
                     new NotBlank(message: 'Choisissez une prestation.'),
                 ],
@@ -80,5 +78,13 @@ class CustomerRequestType extends AbstractType
                 ],
             ])
         ;
+    }
+
+    // Le formulaire remplit directement une demande (CustomerRequest)
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => CustomerRequest::class,
+        ]);
     }
 }

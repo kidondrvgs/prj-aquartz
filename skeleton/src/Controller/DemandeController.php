@@ -2,27 +2,56 @@
 
 namespace App\Controller;
 
+use App\Entity\CustomerRequest;
 use App\Form\CustomerRequestType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class DemandeController extends AbstractController
 {
-    // Page nouvelle demande - affiche le formulaire
+    // Page nouvelle demande - affiche le formulaire et enregistre la demande
+    // Il faut être connecté pour faire une demande
     #[Route('/nouvelle-demande', name: 'app_nouvelle_demande')]
-    public function nouvelleDemande(Request $request): Response
+    #[IsGranted('ROLE_USER')]
+    public function nouvelleDemande(Request $request, EntityManagerInterface $entityManager): Response
     {
-        // On crée le formulaire
-        $form = $this->createForm(CustomerRequestType::class);
+        // Nouvelle demande vide, le formulaire va la remplir
+        $demande = new CustomerRequest();
+
+        // On crée le formulaire relié à la demande
+        $form = $this->createForm(CustomerRequestType::class, $demande);
 
         // On récupère ce que le client a envoyé
         $form->handleRequest($request);
 
         // Formulaire envoyé et tous les champs sont bons
         if ($form->isSubmitted() && $form->isValid()) {
-            // L'enregistrement en BDD sera ajouté plus tard
+            // Le client connecté
+            $user = $this->getUser();
+
+            // On relie la demande au compte du client
+            $demande->setUser($user);
+
+            // Nom, prénom et email repris du compte
+            $demande->setFirstName($user->getFirstName());
+            $demande->setLastName($user->getLastName());
+            $demande->setEmail($user->getEmail());
+
+            // Une nouvelle demande a toujours le statut "Nouvelle"
+            $demande->setStatus('Nouvelle');
+
+            // La prestation choisie dans la liste
+            $prestation = $form->get('prestation')->getData();
+            $demande->addService($prestation);
+
+            // On enregistre en BDD
+            $entityManager->persist($demande);
+            $entityManager->flush();
+
             $this->addFlash('success', 'Votre demande a bien été envoyée. Nous vous répondons sous 48 h.');
 
             // On recharge la page pour ne pas renvoyer le formulaire avec F5
