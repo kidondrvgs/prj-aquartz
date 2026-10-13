@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% set reference = '#D-' ~ '%04d'|format(demande.id) %}
+
+{% block title %}Demande {{ reference }} - AQUARTZ Terrassement{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/detail-demande.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    {# ================= EN-TETE ================= #}
+    <section class="page-header">
+        <p class="breadcrumb"><a href="{{ path('app_mes_demandes') }}">Mes demandes</a>  /  {{ reference }}</p>
+        <h1>
+            Demande {{ reference }}
+            {% include 'demande/badge_statut.html.twig' with {statut: demande.status} %}
+        </h1>
+    </section>
+
+    <section class="detail-section">
+
+        {# ================= INFOS DE LA DEMANDE ================= #}
+        <div class="detail-card">
+            <h2>Votre demande</h2>
+
+            <div class="kv-row">
+                <span class="kv-key">Prestation</span>
+                <span class="kv-value">
+                    {% for service in demande.services %}
+                        {{ service.title }}
+                    {% endfor %}
+                </span>
+            </div>
+
+            <div class="kv-row">
+                <span class="kv-key">Date souhaitée</span>
+                <span class="kv-value">{{ demande.dateRequest|date('d/m/Y') }}</span>
+            </div>
+
+            <div class="kv-row">
+                <span class="kv-key">Surface</span>
+                {# La surface n'est pas obligatoire #}
+                <span class="kv-value">{{ demande.surface ? demande.surface ~ ' m²' : 'Non renseignée' }}</span>
+            </div>
+
+            <div class="kv-row">
+                <span class="kv-key">Adresse du chantier</span>
+                <span class="kv-value">{{ demande.location }}</span>
+            </div>
+
+            <div class="kv-row">
+                <span class="kv-key">Description</span>
+                {# nl2br garde les retours à la ligne tapés par le client #}
+                <span class="kv-value">{{ demande.description|nl2br }}</span>
+            </div>
+        </div>
+
+        {# ================= CONTACT ================= #}
+        <aside class="detail-aside">
+            <div class="detail-card">
+                <h2>Vos coordonnées</h2>
+
+                <div class="kv-row">
+                    <span class="kv-key">Nom</span>
+                    <span class="kv-value">{{ demande.firstName }} {{ demande.lastName }}</span>
+                </div>
+
+                <div class="kv-row">
+                    <span class="kv-key">E-mail</span>
+                    <span class="kv-value">{{ demande.email }}</span>
+                </div>
+            </div>
+
+            <a href="{{ path('app_mes_demandes') }}" class="btn btn-outline">← Retour à mes demandes</a>
+        </aside>
+
+    </section>
+
+{% endblock %}

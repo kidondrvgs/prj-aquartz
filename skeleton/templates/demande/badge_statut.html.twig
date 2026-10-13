@@ -1,0 +1,10 @@
+{# Couleur du badge selon le statut de la demande #}
+{% set couleurs = {
+    'Nouvelle': 'badge-nouvelle',
+    'En cours': 'badge-en-cours',
+    'Acceptée': 'badge-acceptee',
+    'Terminée': 'badge-terminee',
+    'Refusée': 'badge-refusee',
+} %}
+
+<span class="badge {{ couleurs[statut] ?? 'badge-nouvelle' }}">{{ statut }}</span>

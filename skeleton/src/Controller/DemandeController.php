@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\CustomerRequest;
 use App\Form\CustomerRequestType;
+use App\Repository\CustomerRequestRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,12 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+// Toutes les pages des demandes sont réservées aux clients connectés
+#[IsGranted('ROLE_USER')]
 class DemandeController extends AbstractController
 {
     // Page nouvelle demande - affiche le formulaire et enregistre la demande
-    // Il faut être connecté pour faire une demande
     #[Route('/nouvelle-demande', name: 'app_nouvelle_demande')]
-    #[IsGranted('ROLE_USER')]
     public function nouvelleDemande(Request $request, EntityManagerInterface $entityManager): Response
     {
         // Nouvelle demande vide, le formulaire va la remplir
@@ -61,6 +62,49 @@ class DemandeController extends AbstractController
         // On affiche la page avec le formulaire
         return $this->render('demande/nouvelle_demande.html.twig', [
             'form' => $form,
+        ]);
+    }
+
+    // Page mes demandes - liste des demandes du client connecté
+    #[Route('/mes-demandes', name: 'app_mes_demandes')]
+    public function mesDemandes(Request $request, CustomerRequestRepository $customerRequestRepository): Response
+    {
+        // Statut choisi dans les filtres (ex : /mes-demandes?statut=En cours)
+        $statut = $request->query->get('statut');
+
+        // On cherche seulement les demandes du client connecté
+        $criteres = ['user' => $this->getUser()];
+
+        // Si un filtre est choisi, on l'ajoute
+        if ($statut) {
+            $criteres['status'] = $statut;
+        }
+
+        // La plus récente en premier
+        $demandes = $customerRequestRepository->findBy($criteres, ['id' => 'DESC']);
+
+        // Nombre total de demandes du client, pour le filtre "Toutes"
+        $total = $customerRequestRepository->count(['user' => $this->getUser()]);
+
+        return $this->render('demande/mes_demandes.html.twig', [
+            'demandes' => $demandes,
+            'statut' => $statut,
+            'total' => $total,
+        ]);
+    }
+
+    // Page détail d'une demande
+    // Symfony va chercher tout seul la demande qui a l'id de l'URL
+    #[Route('/mes-demandes/{id}', name: 'app_detail_demande')]
+    public function detailDemande(CustomerRequest $demande): Response
+    {
+        // Un client ne peut voir que ses propres demandes
+        if ($demande->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        return $this->render('demande/detail_demande.html.twig', [
+            'demande' => $demande,
         ]);
     }
 }

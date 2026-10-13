@@ -41,13 +41,30 @@
                 <a href="{{ path('app_nouvelle_demande') }}">
                     Faire une demande
                 </a>
+
+                {# Seulement pour un client connecté #}
+                {% if app.user %}
+                    <a href="{{ path('app_mes_demandes') }}">
+                        Mes demandes
+                    </a>
+                {% endif %}
             </div>
 
             <div class="nav-account">
-                {# À remplacer par path('app_login') / path('app_register') une fois ces routes créées #}
-                <a href="#" class="nav-login">Connexion</a>
+                {# app.user = le client connecté (vide si personne n'est connecté) #}
+                {% if app.user %}
+                    <span class="nav-user">
+                        <span class="nav-user-rond"></span>
+                        {{ app.user.firstName }} {{ app.user.lastName }}
+                    </span>
 
-                <a href="#" class="nav-register">Inscription</a>
+                    <a href="{{ path('app_logout') }}" class="nav-login">Déconnexion</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="nav-login">Connexion</a>
+
+                    {# À remplacer par path('app_register') une fois la route créée #}
+                    <a href="#" class="nav-register">Inscription</a>
+                {% endif %}
             </div>
 
         </nav>
@@ -93,6 +110,10 @@
 
                 <a href="{{ path('app_nouvelle_demande') }}">
                     Faire une demande
+                </a>
+
+                <a href="{{ path('app_mes_demandes') }}">
+                    Mes demandes
                 </a>
 
             </div>
