@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\CustomerRequest;
 use App\Form\CustomerRequestType;
 use App\Repository\CustomerRequestRepository;
+use App\Repository\ServiceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,13 +19,19 @@ class DemandeController extends AbstractController
 {
     // Page nouvelle demande - affiche le formulaire et enregistre la demande
     #[Route('/nouvelle-demande', name: 'app_nouvelle_demande')]
-    public function nouvelleDemande(Request $request, EntityManagerInterface $entityManager): Response
+    public function nouvelleDemande(Request $request, EntityManagerInterface $entityManager, ServiceRepository $serviceRepository): Response
     {
         // Nouvelle demande vide, le formulaire va la remplir
         $demande = new CustomerRequest();
 
         // On crée le formulaire relié à la demande
         $form = $this->createForm(CustomerRequestType::class, $demande);
+
+        // Prestation déjà choisie si on vient de la page prestations
+        $idPrestation = $request->query->get('prestation');
+        if ($idPrestation) {
+            $form->get('prestation')->setData($serviceRepository->find($idPrestation));
+        }
 
         // On récupère ce que le client a envoyé
         $form->handleRequest($request);
@@ -69,7 +76,7 @@ class DemandeController extends AbstractController
     #[Route('/mes-demandes', name: 'app_mes_demandes')]
     public function mesDemandes(Request $request, CustomerRequestRepository $customerRequestRepository): Response
     {
-        // Statut choisi dans les filtres (ex : /mes-demandes?statut=En cours)
+        // Statut choisi dans les filtres
         $statut = $request->query->get('statut');
 
         // On cherche seulement les demandes du client connecté

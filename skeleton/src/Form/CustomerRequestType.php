@@ -24,7 +24,7 @@ class CustomerRequestType extends AbstractType
     {
         $builder
             // Liste des prestations prise dans la table service
-            // mapped false : pas de propriété "prestation" dans l'entité, on la gère dans le contrôleur
+            // mapped false car la prestation est ajoutée dans le contrôleur
             ->add('prestation', EntityType::class, [
                 'class' => Service::class,
                 'choice_label' => 'title',
@@ -79,7 +79,7 @@ class CustomerRequestType extends AbstractType
         ;
     }
 
-    // Le formulaire remplit directement une demande (CustomerRequest)
+    // Le formulaire remplit une demande
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

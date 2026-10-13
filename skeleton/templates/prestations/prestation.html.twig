@@ -18,7 +18,7 @@
         <div class="prestations-grid">
 
             {# Une carte par prestation de la BDD #}
-            {# L'image porte le même nom que le slug (ex : terrassement.jpg) #}
+            {# L'image a le même nom que le slug #}
             {% for prestation in prestations %}
                 <article class="card">
                     <div class="card-image">
@@ -27,7 +27,8 @@
                     <div class="card-body">
                         <h3>{{ prestation.title }}</h3>
                         <p>{{ prestation.description }}</p>
-                        <a href="{{ path('app_nouvelle_demande') }}" class="btn btn-yellow">Faire une demande</a>
+                        {# On envoie l'id de la prestation au formulaire #}
+                        <a href="{{ path('app_nouvelle_demande', {prestation: prestation.id}) }}" class="btn btn-yellow">Faire une demande</a>
                     </div>
                 </article>
             {% endfor %}
