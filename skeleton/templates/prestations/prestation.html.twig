@@ -17,71 +17,20 @@
     <section class="prestations-list">
         <div class="prestations-grid">
 
-            <article class="card">
-                <div class="card-image">
-                    <img src="{{ asset('images/terrassement.jpg') }}" alt="Pelleteuse en train de réaliser des travaux de terrassement">
-                </div>
-                <div class="card-body">
-                    <h3>Terrassement général</h3>
-                    <p>Décaissement, nivellement, création de plateformes et évacuation des terres.</p>
-                    <a href="{{ path('app_nouvelle_demande') }}" class="btn btn-yellow">Faire une demande</a>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <img src="{{ asset('images/assainissement.jpg') }}" alt="Travaux d'assainissement et pose de canalisations">
-                </div>
-                <div class="card-body">
-                    <h3>Assainissement</h3>
-                    <p>Fosses septiques, drainage, puisards et raccordements aux réseaux.</p>
-                    <a href="{{ path('app_nouvelle_demande') }}" class="btn btn-yellow">Faire une demande</a>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <img src="{{ asset('images/tranchees.jpg') }}" alt="Ouverture de tranchée pour réseaux">
-                </div>
-                <div class="card-body">
-                    <h3>Tranchées et réseaux</h3>
-                    <p>Ouverture et remblaiement de tranchées pour eau, électricité et fibre.</p>
-                    <a href="{{ path('app_nouvelle_demande') }}" class="btn btn-yellow">Faire une demande</a>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <img src="{{ asset('images/demolition.jpg') }}" alt="Pelleteuse réalisant des travaux de démolition">
-                </div>
-                <div class="card-body">
-                    <h3>Démolition</h3>
-                    <p>Dépose de dalles, murets, terrasses et petites structures.</p>
-                    <a href="{{ path('app_nouvelle_demande') }}" class="btn btn-yellow">Faire une demande</a>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <img src="{{ asset('images/amenagement-exterieur.jpg') }}" alt="Pose de pavés pour aménager une allée extérieure">
-                </div>
-                <div class="card-body">
-                    <h3>Aménagement extérieur</h3>
-                    <p>Accès, cours, allées, voiries légères et finitions de terrain.</p>
-                    <a href="{{ path('app_nouvelle_demande') }}" class="btn btn-yellow">Faire une demande</a>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <img src="{{ asset('images/location-pelle.jpg') }}" alt="Mini-pelle disponible à la location avec chauffeur">
-                </div>
-                <div class="card-body">
-                    <h3>Location de pelle avec chauffeur</h3>
-                    <p>Mise à disposition de mini-pelle ou pelle 8 tonnes à la demi-journée.</p>
-                    <a href="{{ path('app_nouvelle_demande') }}" class="btn btn-yellow">Faire une demande</a>
-                </div>
-            </article>
+            {# Une carte par prestation de la BDD #}
+            {# L'image porte le même nom que le slug (ex : terrassement.jpg) #}
+            {% for prestation in prestations %}
+                <article class="card">
+                    <div class="card-image">
+                        <img src="{{ asset('images/' ~ prestation.slug ~ '.jpg') }}" alt="{{ prestation.title }}">
+                    </div>
+                    <div class="card-body">
+                        <h3>{{ prestation.title }}</h3>
+                        <p>{{ prestation.description }}</p>
+                        <a href="{{ path('app_nouvelle_demande') }}" class="btn btn-yellow">Faire une demande</a>
+                    </div>
+                </article>
+            {% endfor %}
 
         </div>
     </section>

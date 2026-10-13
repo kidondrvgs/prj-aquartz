@@ -73,50 +73,19 @@
         
         <div class="prestations-grid">
 
-            <article class="card">
-                <div class="card-image">
-                    <img
-                        src="{{ asset('images/terrassement.jpg') }}"alt="Pelleteuse en train de réaliser des travaux de terrassement">
-                </div>
-                <div class="card-body">
-                    <h3>Terrassement</h3>
-                    <p>Préparation du terrain, nivellement, excavation et mise à niveau des plateformes.</p>
-                    <a href="{{ path('app_prestations') }}" class="link-arrow">En savoir plus →</a>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <img src="{{ asset('images/assainissement.jpg') }}" alt="Travaux d'assainissement et pose de canalisations">
-                </div>
-                <div class="card-body">
-                    <h3>Assainissement</h3>
-                    <p>Installation de réseaux d’évacuation, drainage des eaux et raccordement aux réseaux existants.</p>
-                    <a href="{{ path('app_prestations') }}" class="link-arrow">En savoir plus →</a>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <img src="{{ asset('images/demolition.jpg') }}" alt="Pelleteuse réalisant des travaux de démolition">
-                </div>
-                <div class="card-body">
-                    <h3>Démolition</h3>
-                    <p>Déconstruction de petits bâtiments, démolition de murets et retrait de dalles en béton.</p>
-                    <a href="{{ path('app_prestations') }}" class="link-arrow">En savoir plus →</a>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <img src="{{ asset('images/amenagement-exterieur.jpg') }}" alt="Pose de pavés pour aménager une allée extérieure">
-                </div>
-                <div class="card-body">
-                    <h3>Aménagement extérieur</h3>
-                    <p>Création d’allées, aménagement de cours, pose de revêtements et préparation des accès.</p>
-                    <a href="{{ path('app_prestations') }}" class="link-arrow">En savoir plus →</a>
-                </div>
-            </article>
+            {# Les 4 premières prestations de la BDD #}
+            {% for prestation in prestations %}
+                <article class="card">
+                    <div class="card-image">
+                        <img src="{{ asset('images/' ~ prestation.slug ~ '.jpg') }}" alt="{{ prestation.title }}">
+                    </div>
+                    <div class="card-body">
+                        <h3>{{ prestation.title }}</h3>
+                        <p>{{ prestation.description }}</p>
+                        <a href="{{ path('app_prestations') }}" class="link-arrow">En savoir plus →</a>
+                    </div>
+                </article>
+            {% endfor %}
         </div>
     </section>
 
