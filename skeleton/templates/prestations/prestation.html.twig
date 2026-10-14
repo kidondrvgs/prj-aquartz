@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos prestations - AQUARTZ Terrassement{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/prestations.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <section class="page-header">
+        <p class="breadcrumb"><a href="{{ path('app_accueil') }}">Accueil</a>  /  Prestations</p>
+        <h1>Nos prestations</h1>
+        <p>Choisissez la prestation qui correspond à votre chantier, puis lancez votre demande en quelques clics.</p>
+    </section>
+
+    <section class="prestations-list">
+        <div class="prestations-grid">
+
+            {# Une carte par prestation de la BDD #}
+            {# L'image a le même nom que le slug #}
+            {% for prestation in prestations %}
+                <article class="card">
+                    <div class="card-image">
+                        <img src="{{ asset('images/' ~ prestation.slug ~ '.jpg') }}" alt="{{ prestation.title }}">
+                    </div>
+                    <div class="card-body">
+                        <h3>{{ prestation.title }}</h3>
+                        <p>{{ prestation.description }}</p>
+                        {# On envoie l'id de la prestation au formulaire #}
+                        <a href="{{ path('app_nouvelle_demande', {prestation: prestation.id}) }}" class="btn btn-yellow">Faire une demande</a>
+                    </div>
+                </article>
+            {% endfor %}
+
+        </div>
+    </section>
+
+{% endblock %}
