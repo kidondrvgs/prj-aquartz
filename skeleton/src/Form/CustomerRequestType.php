@@ -23,7 +23,7 @@ class CustomerRequestType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // Liste des prestations prise dans la table service
+            // Liste des prestation prise dans la table service
             // mapped false car la prestation est ajoutée dans le contrôleur
             ->add('prestation', EntityType::class, [
                 'class' => Service::class,

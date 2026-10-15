@@ -24,7 +24,7 @@
             </p>
 
             <div class="hero-buttons">
-                <a href="{{ path('app_prestations') }}" class="btn btn-yellow">Voir nos prestations</a>
+                <a href="{{ path('app_prestation') }}" class="btn btn-yellow">Voir nos prestations</a>
                 <a href="{{ path('app_nouvelle_demande') }}" class="btn btn-white">Faire une demande</a>
             </div>
         </div>
@@ -67,13 +67,13 @@
     <section class="prestations" id="prestations">
         <div class="prestations-header">
             <h2>Nos prestations</h2>
-            <a href="{{ path('app_prestations') }}" class="link-arrow">Voir toutes les prestations →</a>
+            <a href="{{ path('app_prestation') }}" class="link-arrow">Voir toutes les prestations →</a>
         </div>
 
-        
+
         <div class="prestations-grid">
 
-            {# Les 4 premières prestations de la BDD #}
+            {# Les 4 premières prestation de la BDD #}
             {% for prestation in prestations %}
                 <article class="card">
                     <div class="card-image">
@@ -82,7 +82,7 @@
                     <div class="card-body">
                         <h3>{{ prestation.title }}</h3>
                         <p>{{ prestation.description }}</p>
-                        <a href="{{ path('app_prestations') }}" class="link-arrow">En savoir plus →</a>
+                        <a href="{{ path('app_prestation') }}" class="link-arrow">En savoir plus →</a>
                     </div>
                 </article>
             {% endfor %}

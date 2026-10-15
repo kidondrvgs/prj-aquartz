@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Service{% endblock %}
+
+{% block body %}
+    <h1>Service</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ service.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ service.title }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ service.slug }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ service.description }}</td>
+            </tr>
+            <tr>
+                <th>Images</th>
+                <td>{{ service.images ? service.images|json_encode : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_prestation_index') }}">back to list</a>
+
+    <a href="{{ path('app_prestation_edit', {'id': service.id}) }}">edit</a>
+
+    {{ include('prestation/_delete_form.html.twig') }}
+{% endblock %}

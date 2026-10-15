@@ -3,7 +3,7 @@
 {% block title %}Nos prestations - AQUARTZ Terrassement{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/prestations.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/prestation.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -28,7 +28,7 @@
                         <h3>{{ prestation.title }}</h3>
                         <p>{{ prestation.description }}</p>
                         {# On envoie l'id de la prestation au formulaire #}
-                        <a href="{{ path('app_nouvelle_demande', {prestation: prestation.id}) }}" class="btn btn-yellow">Faire une demande</a>
+                        <a href="{{ path('app_nouvelle_demande', {prestation: prestations.id}) }}" class="btn btn-yellow">Faire une demande</a>
                     </div>
                 </article>
             {% endfor %}

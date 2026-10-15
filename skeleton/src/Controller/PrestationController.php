@@ -7,16 +7,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class PrestationsController extends AbstractController
+final class PrestationController extends AbstractController
 {
-    // Page prestations - affiche toutes les prestations de la BDD
-    #[Route('/prestations', name: 'app_prestations')]
+    #[Route('/prestations', name: 'app_prestation')]
     public function index(ServiceRepository $serviceRepository): Response
     {
         // On récupère toutes les prestations
         $prestations = $serviceRepository->findAll();
 
-        return $this->render('prestations/prestation.html.twig', [
+        return $this->render('prestation/index.html.twig', [
             'prestations' => $prestations,
         ]);
     }

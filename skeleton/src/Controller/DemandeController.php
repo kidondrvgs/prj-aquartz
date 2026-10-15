@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\CustomerRequest;
+use App\Entity\User;
 use App\Form\CustomerRequestType;
 use App\Repository\CustomerRequestRepository;
 use App\Repository\ServiceRepository;
@@ -27,7 +28,7 @@ class DemandeController extends AbstractController
         // On crée le formulaire relié à la demande
         $form = $this->createForm(CustomerRequestType::class, $demande);
 
-        // Prestation déjà choisie si on vient de la page prestations
+        // Prestation déjà choisie si on vient de la page prestation
         $idPrestation = $request->query->get('prestation');
         if ($idPrestation) {
             $form->get('prestation')->setData($serviceRepository->find($idPrestation));

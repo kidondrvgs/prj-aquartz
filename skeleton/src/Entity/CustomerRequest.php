@@ -209,4 +209,8 @@ class   CustomerRequest
 
         return $this;
     }
+
+    public function setUser(?\Symfony\Component\Security\Core\User\UserInterface $user)
+    {
+    }
 }
