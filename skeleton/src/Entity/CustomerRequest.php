@@ -50,8 +50,12 @@ class   CustomerRequest
     /**
      * @var Collection<int, Service>
      */
-    #[ORM\ManyToMany(targetEntity: Service::class, mappedBy: 'fk_customerrequest')]
+    #[ORM\ManyToMany(targetEntity: Service::class, mappedBy: 'fk_customer_request')]
     private Collection $services;
+
+    #[ORM\ManyToOne(inversedBy: 'customerRequests')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -206,6 +210,18 @@ class   CustomerRequest
         if ($this->services->removeElement($service)) {
             $service->removeFkCustomerRequest($this);
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

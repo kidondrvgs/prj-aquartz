@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -38,6 +40,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
+
+    /**
+     * @var Collection<int, CustomerRequest>
+     */
+    #[ORM\OneToMany(targetEntity: CustomerRequest::class, mappedBy: 'user')]
+    private Collection $customerRequests;
+
+    public function __construct()
+    {
+        $this->customerRequests = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -134,6 +147,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(string $lastName): static
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CustomerRequest>
+     */
+    public function getCustomerRequests(): Collection
+    {
+        return $this->customerRequests;
+    }
+
+    public function addCustomerRequest(CustomerRequest $customerRequest): static
+    {
+        if (!$this->customerRequests->contains($customerRequest)) {
+            $this->customerRequests->add($customerRequest);
+            $customerRequest->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCustomerRequest(CustomerRequest $customerRequest): static
+    {
+        if ($this->customerRequests->removeElement($customerRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($customerRequest->getUser() === $this) {
+                $customerRequest->setUser(null);
+            }
+        }
 
         return $this;
     }
