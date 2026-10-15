@@ -15,9 +15,6 @@
 
     <link rel="stylesheet" href="{{ asset('css/base.css') }}">
 
-    {# Styles communs à toutes les pages #}
-    <link rel="stylesheet" href="{{ asset('css/Components.css') }}">
-
     {% block stylesheets %}{% endblock %}
 </head>
 
@@ -34,37 +31,23 @@
             <div class="nav-links">
                 <a href="{{ path('app_accueil') }}">Accueil</a>
 
-                <a href="{{ path('app_prestations') }}">
+                {# Tant que la page Prestations n'existe pas encore, on pointe vers la section de l'accueil #}
+                <a href="{{ path('app_accueil') }}#prestations">
                     Prestations
                 </a>
 
-                <a href="{{ path('app_nouvelle_demande') }}">
+                <a href="{{ path('app_accueil') }}#demande">
                     Faire une demande
                 </a>
-
-                {# Seulement pour un client connecté #}
-                {% if app.user %}
-                    <a href="{{ path('app_mes_demandes') }}">
-                        Mes demandes
-                    </a>
-                {% endif %}
             </div>
 
             <div class="nav-account">
-                {# Nom du client connecté #}
-                {% if app.user %}
-                    <span class="nav-user">
-                        <span class="nav-user-rond"></span>
-                        {{ app.user.firstName }} {{ app.user.lastName }}
-                    </span>
-
-                    <a href="{{ path('app_logout') }}" class="nav-login">Déconnexion</a>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('app_logout') }}" class="nav-login">Déconnexion</a>
                 {% else %}
-                    <a href="{{ path('app_login') }}" class="nav-login">Connexion</a>
-
-                    {# À remplacer par path('app_register') une fois la route créée #}
-                    <a href="#" class="nav-register">Inscription</a>
+                <a href="{{ path('app_login') }}" class="nav-login">Connexion</a>
                 {% endif %}
+                <a href="{{ path('app_register') }}" class="nav-register">Inscription</a>
             </div>
 
         </nav>
@@ -104,16 +87,12 @@
 
                 <a href="{{ path('app_accueil') }}">Accueil</a>
 
-                <a href="{{ path('app_prestations') }}">
+                <a href="{{ path('app_accueil') }}#prestations">
                     Prestations
                 </a>
 
-                <a href="{{ path('app_nouvelle_demande') }}">
+                <a href="{{ path('app_accueil') }}#demande">
                     Faire une demande
-                </a>
-
-                <a href="{{ path('app_mes_demandes') }}">
-                    Mes demandes
                 </a>
 
             </div>
@@ -127,7 +106,7 @@
                 <p>14 rue des Carrières, 76000 Rouen</p>
                 <p>02 35 00 00 00</p>
 
-                <a href="{{ path('app_nouvelle_demande') }}">
+                <a href="{{ path('app_accueil') }}#demande">
                     Parlons de votre projet
                 </a>
 
