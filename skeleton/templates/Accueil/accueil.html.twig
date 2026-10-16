@@ -3,7 +3,7 @@
 {% block title %}Accueil - AQUARTZ Terrassement{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/accueil.css') }}?v=20261016-4">
 {% endblock %}
 
 {% block body %}
@@ -71,9 +71,14 @@
         </div>
 
         
-        <div class="prestations-grid">
+        <div class="carrousel-commandes" hidden>
+            <button type="button" class="carrousel-bouton" id="prestation-precedente" aria-label="Prestations précédentes" aria-controls="carrousel-prestations">←</button>
+            <button type="button" class="carrousel-bouton" id="prestation-suivante" aria-label="Prestations suivantes" aria-controls="carrousel-prestations">→</button>
+        </div>
 
-            {# Les 4 premières prestations de la BDD #}
+        <div class="prestations-grid" id="carrousel-prestations" tabindex="0" role="region" aria-label="Nos prestations">
+
+            {# Une carte par prestation #}
             {% for prestation in prestations %}
                 <article class="card">
                     <div class="card-image">
@@ -88,6 +93,8 @@
             {% endfor %}
         </div>
     </section>
+
+    <script src="{{ asset('js/accueil.js') }}?v=20261016-4" defer></script>
 
 
     {# ================= CTA ================= #}

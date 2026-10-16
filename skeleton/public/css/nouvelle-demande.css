@@ -37,6 +37,51 @@
     gap: 18px;
 }
 
+.prestations-selecteur {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.prestations-selecteur summary {
+    padding: 10px 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.prestations-selecteur summary:focus-visible {
+    outline: 2px solid var(--yellow);
+}
+
+.prestations-choix {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+    gap: 8px 12px;
+    max-height: 160px;
+    overflow-y: auto;
+    padding: 8px 12px 12px;
+}
+
+.prestation-choix {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.prestation-choix input {
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    flex-shrink: 0;
+    accent-color: var(--brown);
+}
+
+.prestation-choix label {
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+
 /* Messages d'erreur sous les champs */
 .field ul {
     list-style: none;

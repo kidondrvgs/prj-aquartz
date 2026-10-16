@@ -28,9 +28,12 @@ class DemandeController extends AbstractController
         $form = $this->createForm(CustomerRequestType::class, $demande);
 
         // Prestation déjà choisie si on vient de la page prestations
-        $idPrestation = $request->query->get('prestation');
-        if ($idPrestation) {
-            $form->get('prestation')->setData($serviceRepository->find($idPrestation));
+        $idPrestation = $request->query->getInt('prestation');
+        if ($request->isMethod('GET') && $idPrestation > 0) {
+            $prestation = $serviceRepository->find($idPrestation);
+            if ($prestation) {
+                $form->get('prestation')->setData([$prestation]);
+            }
         }
 
         // On récupère ce que le client a envoyé
@@ -52,9 +55,10 @@ class DemandeController extends AbstractController
             // Une nouvelle demande a toujours le statut "Nouvelle"
             $demande->setStatus('Nouvelle');
 
-            // La prestation choisie dans la liste
-            $prestation = $form->get('prestation')->getData();
-            $demande->addService($prestation);
+            // On ajoute chaque prestation choisie
+            foreach ($form->get('prestation')->getData() as $prestation) {
+                $demande->addService($prestation);
+            }
 
             // On enregistre en BDD
             $entityManager->persist($demande);

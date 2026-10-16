@@ -9,12 +9,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class AccueilController extends AbstractController
 {
-    // Page d'accueil - affiche les 4 premières prestations
+    // Page d'accueil
     #[Route('/', name: 'app_accueil')]
     public function index(ServiceRepository $serviceRepository): Response
     {
-        // On récupère 4 prestations
-        $prestations = $serviceRepository->findBy([], ['id' => 'ASC'], 4);
+        // On récupère les prestations pour le carrousel
+        $prestations = $serviceRepository->findBy([], ['id' => 'ASC']);
 
         return $this->render('Accueil/accueil.html.twig', [
             'prestations' => $prestations,
