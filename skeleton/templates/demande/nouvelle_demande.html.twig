@@ -3,7 +3,7 @@
 {% block title %}Nouvelle demande - AQUARTZ Terrassement{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/nouvelle-demande.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/nouvelle-demande.css') }}?v=20261016-2">
 {% endblock %}
 
 {% block body %}
@@ -31,7 +31,17 @@
 
                     <div class="field">
                         {{ form_label(form.prestation) }}
-                        {{ form_widget(form.prestation) }}
+                        <details class="prestations-selecteur" {% if form.prestation.vars.errors|length %}open{% endif %}>
+                            <summary>Choisir une ou plusieurs prestations</summary>
+                            <div class="prestations-choix">
+                            {% for choix in form.prestation %}
+                                <div class="prestation-choix">
+                                    {{ form_widget(choix) }}
+                                    {{ form_label(choix) }}
+                                </div>
+                            {% endfor %}
+                            </div>
+                        </details>
                         {{ form_errors(form.prestation) }}
                     </div>
 
@@ -79,7 +89,7 @@
                 <ol class="help-steps">
                     <li>
                         <span class="step-number">1</span>
-                        <p>Vous décrivez votre besoin et choisissez une prestation.</p>
+                        <p>Vous décrivez votre besoin et choisissez une ou plusieurs prestations.</p>
                     </li>
                     <li>
                         <span class="step-number">2</span>
@@ -87,7 +97,7 @@
                     </li>
                     <li>
                         <span class="step-number">3</span>
-                        <p>Suivez le statut dans « Mes demandes ».</p>
+                        <p>Suivez le statut dans <a href="{{ path('app_mes_demandes') }}">Mes demandes</a>.</p>
                     </li>
                 </ol>
             </aside>

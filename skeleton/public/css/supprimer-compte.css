@@ -1,0 +1,46 @@
+.suppression-section {
+    padding: 48px 24px;
+    background: var(--beige);
+}
+
+.suppression-card {
+    max-width: 620px;
+    margin: auto;
+    padding: 28px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.suppression-card h1 {
+    margin-bottom: 16px;
+}
+
+.suppression-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 24px;
+}
+
+.suppression-confirmation {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.suppression-confirmation label {
+    flex: 1;
+}
+
+.suppression-form ul {
+    color: #8a1c12;
+    list-style: none;
+}
+
+.btn-supprimer {
+    background: #8a1c12;
+    color: var(--white);
+}
+

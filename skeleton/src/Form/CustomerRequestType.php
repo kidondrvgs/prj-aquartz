@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
 use Symfony\Component\Validator\Constraints\Regex;
@@ -29,10 +30,11 @@ class CustomerRequestType extends AbstractType
                 'class' => Service::class,
                 'choice_label' => 'title',
                 'mapped' => false,
-                'label' => 'Prestation *',
-                'placeholder' => 'Choisir une prestation',
+                'label' => 'Prestations *',
+                'multiple' => true,
+                'expanded' => true,
                 'constraints' => [
-                    new NotBlank(message: 'Choisissez une prestation.'),
+                    new Count(min: 1, minMessage: 'Choisissez au moins une prestation.'),
                 ],
             ])
 

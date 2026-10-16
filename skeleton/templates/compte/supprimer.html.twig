@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer mon compte - AQUARTZ{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/supprimer-compte.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="suppression-section">
+        <div class="suppression-card">
+            <h1>Supprimer mon compte</h1>
+            <p>Votre compte et toutes vos demandes seront définitivement supprimés. Cette action est irréversible.</p>
+
+            {{ form_start(form, {attr: {class: 'suppression-form'}}) }}
+                {{ form_errors(form) }}
+                <div class="field">
+                    {{ form_row(form.motDePasse) }}
+                </div>
+                <div class="suppression-confirmation">
+                    {{ form_widget(form.confirmation) }}
+                    {{ form_label(form.confirmation) }}
+                    {{ form_errors(form.confirmation) }}
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-supprimer">Supprimer définitivement</button>
+                    <a href="{{ path('app_mes_demandes') }}" class="btn btn-outline">Annuler</a>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}
