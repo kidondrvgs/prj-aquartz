@@ -1,0 +1,5 @@
+{% if prestation.prix is not null %}
+    <strong class="prestation-prix">{{ (prestation.prix / 100)|number_format(2, ',', ' ') }} €</strong>
+{% else %}
+    <strong class="prestation-prix">Sur devis</strong>
+{% endif %}

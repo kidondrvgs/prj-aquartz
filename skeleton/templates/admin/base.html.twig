@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="page-header">
+        <p class="breadcrumb">Administration / {% block rubrique %}{% endblock %}</p>
+        <h1>{% block titre %}{% endblock %}</h1>
+    </section>
+    <section class="admin-section">
+        {% for message in app.flashes('success') %}
+            <p class="form-success" role="status">{{ message }}</p>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <p class="form-error" role="alert">{{ message }}</p>
+        {% endfor %}
+        {% block contenu %}{% endblock %}
+    </section>
+{% endblock %}

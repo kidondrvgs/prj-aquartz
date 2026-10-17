@@ -3,7 +3,7 @@ const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const script = fs.readFileSync('public/js/accueil.js', 'utf8');
 
-for (const nombre of [0, 1, 12]) {
+for (const [nombre, largeur] of [[0, 1112], [1, 1112], [2, 1112], [3, 1112], [4, 1112], [12, 1112], [2, 260]]) {
     const clics = {};
     const commandes = { hidden: true };
     let avancer;
@@ -15,8 +15,15 @@ for (const nombre of [0, 1, 12]) {
     const carrousel = {
         children: Array.from({ length: nombre }, () => carte),
         scrollLeft: 0,
-        appendChild(copie) { this.children.push(copie); },
-        scrollBy(options) { this.scrollLeft += options.left; },
+        clientWidth: largeur,
+        scrollWidth: Math.max(largeur, nombre * 284 - 24),
+        appendChild(copie) {
+            this.children.push(copie);
+            this.scrollWidth = this.children.length * 284 - 24;
+        },
+        scrollBy(options) {
+            this.scrollLeft = Math.max(0, Math.min(this.scrollLeft + options.left, this.scrollWidth - this.clientWidth));
+        },
         scrollTo(options) { this.scrollLeft = options.left; },
     };
     const document = {
@@ -35,8 +42,9 @@ for (const nombre of [0, 1, 12]) {
             avancer = action;
         },
     });
-    assert.equal(commandes.hidden, nombre === 0);
-    if (nombre > 0) {
+    const deborde = nombre * 284 - 24 > largeur + 2;
+    assert.equal(commandes.hidden, !deborde);
+    if (deborde) {
         assert.equal(carrousel.children.length, nombre * 2);
         clics['prestation-suivante']();
         assert.equal(carrousel.scrollLeft, 284);
@@ -53,6 +61,9 @@ for (const nombre of [0, 1, 12]) {
         reduit = true;
         avancer();
         assert.equal(carrousel.scrollLeft, 284);
+    } else {
+        assert.equal(carrousel.children.length, nombre);
+        assert.equal(avancer, undefined);
     }
 }
-console.log('OK : intervalle de 3 secondes, trois tours, flèches, catalogue vide et mouvement réduit.');
+console.log('OK : trois tours, flèches, catalogue court sans blocage, mobile et mouvement réduit.');

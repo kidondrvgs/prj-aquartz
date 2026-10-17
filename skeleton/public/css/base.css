@@ -123,7 +123,8 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 28px;
+    gap: 14px 22px;
+    flex-wrap: wrap;
 }
 
 .nav-links a {

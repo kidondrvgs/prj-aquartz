@@ -21,6 +21,9 @@ class DemandeController extends AbstractController
     #[Route('/nouvelle-demande', name: 'app_nouvelle_demande')]
     public function nouvelleDemande(Request $request, EntityManagerInterface $entityManager, ServiceRepository $serviceRepository): Response
     {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_admin_demandes');
+        }
         // Nouvelle demande vide, le formulaire va la remplir
         $demande = new CustomerRequest();
 
@@ -60,6 +63,9 @@ class DemandeController extends AbstractController
                 $demande->addService($prestation);
             }
 
+            // On garde le total calculé au moment de la demande
+            $demande->setMontantEstime($demande->calculerTotal());
+
             // On enregistre en BDD
             $entityManager->persist($demande);
             $entityManager->flush();
@@ -80,6 +86,9 @@ class DemandeController extends AbstractController
     #[Route('/mes-demandes', name: 'app_mes_demandes')]
     public function mesDemandes(Request $request, CustomerRequestRepository $customerRequestRepository): Response
     {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_admin_demandes');
+        }
         // Statut choisi dans les filtres
         $statut = $request->query->get('statut');
 

@@ -26,10 +26,15 @@
             <h2>Votre demande</h2>
 
             <div class="kv-row">
+                <span class="kv-key">Total estimatif</span>
+                <span class="kv-value">{{ demande.montantEstime is not null ? (demande.montantEstime / 100)|number_format(2, ',', ' ') ~ ' €' : 'Sur devis' }}</span>
+            </div>
+
+            <div class="kv-row">
                 <span class="kv-key">Prestation</span>
                 <span class="kv-value">
                     {% for service in demande.services %}
-                        {{ service.title }}
+                        {{ service.title }}{{ not loop.last ? ', ' }}
                     {% endfor %}
                 </span>
             </div>
@@ -54,6 +59,8 @@
                 {# nl2br garde les retours à la ligne tapés par le client #}
                 <span class="kv-value">{{ demande.description|nl2br }}</span>
             </div>
+            <h2>Réponse du professionnel</h2>
+            <p>{{ demande.reponse ? demande.reponse|nl2br : 'Nous n’avons pas encore répondu à votre demande.' }}</p>
         </div>
 
         {# ================= CONTACT ================= #}

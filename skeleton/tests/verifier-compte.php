@@ -18,6 +18,7 @@ function verifier(bool $condition, string $message): void
 }
 
 $twig = new Environment(new FilesystemLoader(dirname(__DIR__).'/templates'));
+$twig->addFunction(new TwigFunction('is_granted', fn () => false));
 foreach (['asset', 'path', 'form_start', 'form_end', 'form_errors', 'form_row', 'form_widget', 'form_label'] as $name) {
     $twig->addFunction(new TwigFunction($name, fn ($value) => $value));
 }

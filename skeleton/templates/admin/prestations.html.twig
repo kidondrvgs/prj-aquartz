@@ -1,0 +1,74 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Gestion des prestations - AQUARTZ{% endblock %}
+{% block rubrique %}Prestations{% endblock %}
+{% block titre %}Gestion des prestations{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin-prestations.css') }}">
+{% endblock %}
+
+{% block contenu %}
+    <div class="admin-entete">
+        <p>{{ prestations|length }} prestations enregistrées</p>
+        <a href="{{ path('app_admin_prestations') }}#formulaire-prestation" class="btn btn-yellow">+ Ajouter une prestation</a>
+    </div>
+    <p>Tarifs indicatifs de démonstration, par forfait. Le devis définitif dépend du chantier.</p>
+    <div class="admin-tableau">
+        <table>
+            <thead>
+                <tr>
+                    <th>Prestation</th>
+                    <th>Description</th>
+                    <th>Prix indicatif</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ligne in prestations %}
+                    <tr>
+                        <td>{{ ligne.title }}</td>
+                        <td>{{ ligne.description }}</td>
+                        <td>{{ ligne.prix is not null ? (ligne.prix / 100)|number_format(2, ',', ' ') ~ ' €' : 'Sur devis' }}</td>
+                        <td>
+                            <a href="{{ path('app_admin_prestation_modifier', {id: ligne.id}) }}#formulaire-prestation">Modifier</a>
+                        </td>
+                        <td>
+                            <details class="admin-suppression">
+                                <summary>Supprimer</summary>
+                                <form method="post" action="{{ path('app_admin_prestation_supprimer', {id: ligne.id}) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('supprimer_prestation_' ~ ligne.id) }}">
+                                    <p>Confirmer la suppression de {{ ligne.title }} ?</p>
+                                    <button type="submit" class="btn btn-outline">Confirmer</button>
+                                </form>
+                            </details>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">Aucune prestation.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="admin-card admin-edition" id="formulaire-prestation">
+        <h2>{{ nouvelle ? 'Nouvelle prestation' : 'Modifier la prestation' }}</h2>
+        {{ form_start(form, {attr: {class: 'admin-form', novalidate: 'novalidate'}}) }}
+            {{ form_errors(form) }}
+            {% for champ in form %}
+                {% if champ.vars.name != '_token' %}
+                    <div class="field">
+                        {{ form_row(champ) }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <div class="admin-actions">
+                <button type="submit" class="btn btn-yellow">Enregistrer</button>
+                <a href="{{ path('app_admin_prestations') }}" class="btn btn-outline">Annuler</a>
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

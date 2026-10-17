@@ -3,7 +3,7 @@
 {% block title %}Nouvelle demande - AQUARTZ Terrassement{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('css/nouvelle-demande.css') }}?v=20261016-2">
+    <link rel="stylesheet" href="{{ asset('css/nouvelle-demande.css') }}?v=20261017-1">
 {% endblock %}
 
 {% block body %}
@@ -38,11 +38,17 @@
                                 <div class="prestation-choix">
                                     {{ form_widget(choix) }}
                                     {{ form_label(choix) }}
+                                    <span class="choix-prix">{{ choix.vars.attr['data-prix'] != '' ? (choix.vars.attr['data-prix'] / 100)|number_format(2, ',', ' ') ~ ' €' : 'Sur devis' }}</span>
                                 </div>
                             {% endfor %}
                             </div>
                         </details>
                         {{ form_errors(form.prestation) }}
+                    </div>
+
+                    <div class="demande-total" aria-live="polite">
+                        <strong>Total estimatif : <span id="total-prestations">Choisissez vos prestations</span></strong>
+                        <p>Tarifs indicatifs de démonstration, par forfait. Le montant définitif sera confirmé par devis.</p>
                     </div>
 
                     <div class="field">
@@ -106,4 +112,5 @@
 
     </section>
 
+    <script src="{{ asset('js/nouvelle-demande.js') }}" defer></script>
 {% endblock %}

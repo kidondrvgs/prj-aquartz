@@ -1,0 +1,46 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration - AQUARTZ{% endblock %}
+{% block rubrique %}Tableau de bord{% endblock %}
+{% block titre %}Tableau de bord{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin-accueil.css') }}">
+{% endblock %}
+
+{% block contenu %}
+    <div class="admin-chiffres">
+        <div class="admin-card">
+            <strong>{{ total }}</strong>
+            <span>Demandes reçues</span>
+        </div>
+        <div class="admin-card">
+            <strong>{{ nouvelles }}</strong>
+            <span>Nouvelles demandes</span>
+        </div>
+        <div class="admin-card">
+            <strong>{{ enCours }}</strong>
+            <span>En cours</span>
+        </div>
+        <div class="admin-card">
+            <strong>{{ prestations }}</strong>
+            <span>Prestations</span>
+        </div>
+    </div>
+    <div class="admin-actions">
+        <a href="{{ path('app_admin_demandes') }}" class="btn btn-yellow">Traiter les demandes</a>
+        <a href="{{ path('app_admin_prestations') }}" class="btn btn-outline">Gérer les prestations et les prix</a>
+    </div>
+    <h2>Dernières demandes</h2>
+    <div class="admin-liste">
+        {% for demande in demandes %}
+            <a class="admin-ligne" href="{{ path('app_admin_demande', {id: demande.id}) }}">
+                <span>#D-{{ '%04d'|format(demande.id) }} · {{ demande.firstName }} {{ demande.lastName }}</span>
+                {% include 'demande/badge_statut.html.twig' with {statut: demande.status} %}
+            </a>
+        {% else %}
+            <p class="admin-card">Aucune demande pour le moment.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
