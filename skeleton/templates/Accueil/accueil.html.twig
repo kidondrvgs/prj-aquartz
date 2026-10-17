@@ -70,6 +70,8 @@
             <a href="{{ path('app_prestations') }}" class="link-arrow">Voir toutes les prestations →</a>
         </div>
 
+        <p>Tarifs indicatifs de démonstration, par forfait. Devis définitif selon le chantier.</p>
+
         
         <div class="carrousel-commandes" hidden>
             <button type="button" class="carrousel-bouton" id="prestation-precedente" aria-label="Prestations précédentes" aria-controls="carrousel-prestations">←</button>
@@ -82,11 +84,12 @@
             {% for prestation in prestations %}
                 <article class="card">
                     <div class="card-image">
-                        <img src="{{ asset('images/' ~ prestation.slug ~ '.jpg') }}" alt="{{ prestation.title }}">
+                        <img src="{{ asset('images/' ~ (prestation.images[0] ?? prestation.slug ~ '.jpg')) }}" alt="{{ prestation.title }}" loading="lazy">
                     </div>
                     <div class="card-body">
                         <h3>{{ prestation.title }}</h3>
                         <p>{{ prestation.description }}</p>
+                        {% include 'prestations/prix.html.twig' %}
                         <a href="{{ path('app_prestations') }}" class="link-arrow">En savoir plus →</a>
                     </div>
                 </article>
@@ -94,7 +97,7 @@
         </div>
     </section>
 
-    <script src="{{ asset('js/accueil.js') }}?v=20261016-4" defer></script>
+    <script src="{{ asset('js/accueil.js') }}?v=20261017-2" defer></script>
 
 
     {# ================= CTA ================= #}

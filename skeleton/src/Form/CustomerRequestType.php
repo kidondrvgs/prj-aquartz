@@ -29,6 +29,9 @@ class CustomerRequestType extends AbstractType
             ->add('prestation', EntityType::class, [
                 'class' => Service::class,
                 'choice_label' => 'title',
+                'choice_attr' => function (Service $prestation): array {
+                    return ['data-prix' => $prestation->getPrix() ?? ''];
+                },
                 'mapped' => false,
                 'label' => 'Prestations *',
                 'multiple' => true,

@@ -3,7 +3,8 @@ const precedent = document.getElementById('prestation-precedente');
 const suivant = document.getElementById('prestation-suivante');
 const mouvementReduit = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-if (carrousel.children.length > 0) {
+// On garde les cartes fixes si elles tiennent toutes à l'écran
+if (carrousel.children.length > 0 && carrousel.scrollWidth > carrousel.clientWidth + 2) {
     document.querySelector('.carrousel-commandes').hidden = false;
     const cartes = Array.from(carrousel.children);
 

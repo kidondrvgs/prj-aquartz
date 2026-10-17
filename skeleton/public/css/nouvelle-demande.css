@@ -62,9 +62,10 @@
 }
 
 .prestation-choix {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    align-items: start;
+    gap: 2px 8px;
 }
 
 .prestation-choix input {
@@ -79,6 +80,24 @@
     font-size: 13px;
     font-weight: 400;
     cursor: pointer;
+}
+
+.choix-prix {
+    grid-column: 2;
+    font-size: 12px;
+    color: var(--brown);
+}
+
+.demande-total {
+    padding: 16px;
+    background: var(--beige);
+    border-radius: 8px;
+}
+
+.demande-total p {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
 }
 
 

@@ -12,6 +12,54 @@ use Doctrine\ORM\Mapping as ORM;
 
 class   CustomerRequest
 {
+    public const STATUTS = ['Nouvelle', 'En cours', 'Acceptée', 'Terminée', 'Refusée'];
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $reponse = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $montantEstime = null;
+
+    public function getReponse(): ?string
+    {
+        return $this->reponse;
+    }
+
+    public function setReponse(?string $reponse): static
+    {
+        $this->reponse = $reponse;
+
+        return $this;
+    }
+
+    public function getMontantEstime(): ?int
+    {
+        return $this->montantEstime;
+    }
+
+    public function setMontantEstime(?int $montantEstime): static
+    {
+        $this->montantEstime = $montantEstime;
+
+        return $this;
+    }
+
+    public function calculerTotal(): ?int
+    {
+        if ($this->services->isEmpty()) {
+            return null;
+        }
+
+        $total = 0;
+        foreach ($this->services as $service) {
+            if ($service->getPrix() === null) {
+                return null;
+            }
+            $total += $service->getPrix();
+        }
+
+        return $total;
+    }
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

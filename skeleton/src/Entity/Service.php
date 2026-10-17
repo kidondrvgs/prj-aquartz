@@ -30,6 +30,22 @@ class Service
     #[ORM\Column(nullable: true)]
     private ?array $images = null;
 
+    // Le prix est conservé en centimes pour éviter les erreurs d'arrondi
+    #[ORM\Column(nullable: true)]
+    private ?int $prix = null;
+
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?int $prix): static
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
     /**
      * @var Collection<int, CustomerRequest>
      */

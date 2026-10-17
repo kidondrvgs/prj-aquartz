@@ -24,7 +24,7 @@
         <div class="filters">
             <a href="{{ path('app_mes_demandes') }}" class="filter-chip {{ statut is empty ? 'active' }}">Toutes ({{ total }})</a>
 
-            {% for filtre in ['Nouvelle', 'En cours', 'Acceptée', 'Terminée'] %}
+            {% for filtre in ['Nouvelle', 'En cours', 'Acceptée', 'Terminée', 'Refusée'] %}
                 <a href="{{ path('app_mes_demandes', {statut: filtre}) }}" class="filter-chip {{ statut == filtre ? 'active' }}">{{ filtre }}</a>
             {% endfor %}
         </div>
@@ -47,7 +47,7 @@
 
                     <span class="table-cell col-prestation">
                         {% for service in demande.services %}
-                            {{ service.title }}
+                            {{ service.title }}{{ not loop.last ? ', ' }}
                         {% endfor %}
                     </span>
 

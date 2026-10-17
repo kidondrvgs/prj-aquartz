@@ -1,0 +1,20 @@
+.admin-chiffres {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.admin-chiffres strong {
+    display: block;
+    font-size: 32px;
+}
+
+.admin-chiffres span {
+    color: var(--text-muted);
+}
+
+@media (max-width: 600px) {
+    .admin-chiffres {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
