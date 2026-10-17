@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes demandes - AQUARTZ Terrassement{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/mes-demandes.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    {# ================= EN-TETE ================= #}
+    <section class="page-header mes-demandes-header">
+        <div>
+            <p class="breadcrumb">Espace client</p>
+            <h1>Mes demandes</h1>
+        </div>
+        <a href="{{ path('app_nouvelle_demande') }}" class="btn btn-yellow">+ Nouvelle demande</a>
+    </section>
+
+    <section class="mes-demandes-section">
+
+        {# ================= FILTRES ================= #}
+        {# Chaque filtre est un lien qui envoie le statut dans l'URL #}
+        <div class="filters">
+            <a href="{{ path('app_mes_demandes') }}" class="filter-chip {{ statut is empty ? 'active' }}">Toutes ({{ total }})</a>
+
+            {% for filtre in ['Nouvelle', 'En cours', 'Acceptée', 'Terminée', 'Refusée'] %}
+                <a href="{{ path('app_mes_demandes', {statut: filtre}) }}" class="filter-chip {{ statut == filtre ? 'active' }}">{{ filtre }}</a>
+            {% endfor %}
+        </div>
+
+        {# ================= TABLEAU ================= #}
+        <div class="table-wrap">
+
+            <div class="table-row table-head">
+                <span class="table-cell col-ref">Réf.</span>
+                <span class="table-cell col-prestation">Prestation</span>
+                <span class="table-cell col-date">Date souhaitée</span>
+                <span class="table-cell col-statut">Statut</span>
+                <span class="table-cell col-lien"></span>
+            </div>
+
+            {% for demande in demandes %}
+                <div class="table-row">
+                    {# Id sur 4 chiffres : 42 devient #D-0042 #}
+                    <span class="table-cell col-ref">#D-{{ '%04d'|format(demande.id) }}</span>
+
+                    <span class="table-cell col-prestation">
+                        {% for service in demande.services %}
+                            {{ service.title }}{{ not loop.last ? ', ' }}
+                        {% endfor %}
+                    </span>
+
+                    <span class="table-cell col-date">{{ demande.dateRequest|date('d/m/Y') }}</span>
+
+                    <span class="table-cell col-statut">
+                        {% include 'demande/badge_statut.html.twig' with {statut: demande.status} %}
+                    </span>
+
+                    <a href="{{ path('app_detail_demande', {id: demande.id}) }}" class="table-cell col-lien">Voir le détail →</a>
+                </div>
+            {% else %}
+                {# Si le client n'a aucune demande #}
+                <div class="table-row">
+                    <p class="table-vide">Aucune demande pour le moment.</p>
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+{% endblock %}

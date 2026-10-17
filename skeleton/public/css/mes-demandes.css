@@ -1,0 +1,58 @@
+/* ========================================
+   PAGE MES DEMANDES
+======================================== */
+
+.mes-demandes-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    padding-bottom: 24px;
+}
+
+.mes-demandes-section {
+    background: var(--beige);
+    padding: 0 80px 72px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+/* ========================================
+   COLONNES DU TABLEAU
+======================================== */
+
+.col-ref { flex: 0 0 110px; font-weight: 700; }
+.col-prestation { flex: 1 1 220px; }
+.col-date { flex: 0 0 150px; }
+.col-statut { flex: 0 0 140px; }
+.col-lien {
+    flex: 0 0 120px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--black);
+    text-decoration: none;
+}
+
+.col-lien:hover {
+    color: var(--brown);
+}
+
+.table-row {
+    font-size: 15px;
+}
+
+.table-vide {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 960px) {
+    .mes-demandes-section { padding-left: 32px; padding-right: 32px; }
+}

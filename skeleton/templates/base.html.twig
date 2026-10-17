@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}AQUARTZ - Terrassement{% endblock %}</title>
+
+    <meta name="description" content="AQUARTZ, spécialiste du terrassement, des VRD et de l'aménagement extérieur.">
+
+    {# Police Inter utilisée sur toute la maquette #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}?v=20261017-1">
+    <link rel="stylesheet" href="{{ asset('css/Components.css') }}">
+
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+
+    {# ================= NAVBAR ================= #}
+    <header class="site-header">
+        <nav class="navbar container">
+
+            <a href="{{ path('app_accueil') }}" class="brand">
+                <img src="{{ asset('images/logo-aquartz.png') }}" alt="AQUARTZ – TERRASSEMENT" class="brand-logo">
+            </a>
+
+            <div class="nav-links">
+                <a href="{{ path('app_accueil') }}">Accueil</a>
+
+                <a href="{{ path('app_prestations') }}">
+                    Prestations
+                </a>
+
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('app_admin') }}">Administration</a>
+                    <a href="{{ path('app_admin_demandes') }}">Demandes clients</a>
+                    <a href="{{ path('app_admin_prestations') }}">Gestion des prestations</a>
+                {% else %}
+                <a href="{{ path('app_nouvelle_demande') }}">
+                    Faire une demande
+                </a>
+                {% if app.user %}
+                    <a href="{{ path('app_mes_demandes') }}">Mes demandes</a>
+                {% endif %}
+                {% endif %}
+            </div>
+
+            <div class="nav-account">
+                {% if app.user %}
+                <details class="menu-compte">
+                    <summary class="nav-user">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                            <circle cx="12" cy="8" r="4" />
+                            <path d="M4 21v-2a8 8 0 0 1 16 0v2" />
+                        </svg>
+                        <span>{{ is_granted('ROLE_ADMIN') ? 'Admin' : 'Connecté' }} : {{ app.user.firstName }}</span>
+                        <span aria-hidden="true">▾</span>
+                    </summary>
+                    <div class="menu-compte-liens">
+                        <a href="{{ path('app_supprimer_compte') }}" class="lien-danger">Supprimer mon compte</a>
+                        <a href="{{ path('app_logout') }}">Déconnexion</a>
+                    </div>
+                </details>
+                {% else %}
+                <a href="{{ path('app_login') }}" class="nav-login">Connexion</a>
+                <a href="{{ path('app_register') }}" class="nav-register">Inscription</a>
+                {% endif %}
+            </div>
+
+        </nav>
+    </header>
+
+
+    {# ================= CONTENU DES PAGES ================= #}
+    <main class="main-content">
+        {% block body %}{% endblock %}
+    </main>
+
+
+    {# ================= FOOTER ================= #}
+    <footer class="site-footer">
+
+        <div class="footer-content container">
+
+            {# Présentation de l'entreprise #}
+            <div class="footer-brand">
+
+                <a href="{{ path('app_accueil') }}" class="footer-logo">
+                    <img src="{{ asset('images/logo-aquartz.png') }}" alt="AQUARTZ – TERRASSEMENT">
+                </a>
+
+                <p>
+                    Votre partenaire pour vos travaux de terrassement,
+                    de VRD et d'aménagement extérieur.
+                </p>
+
+            </div>
+
+
+            {# Liens de navigation #}
+            <div class="footer-links">
+
+                <h3>Navigation</h3>
+
+                <a href="{{ path('app_accueil') }}">Accueil</a>
+
+                <a href="{{ path('app_prestations') }}">
+                    Prestations
+                </a>
+
+                <a href="{{ path(is_granted('ROLE_ADMIN') ? 'app_admin_demandes' : 'app_nouvelle_demande') }}">
+                    {{ is_granted('ROLE_ADMIN') ? 'Demandes clients' : 'Faire une demande' }}
+                </a>
+
+            </div>
+
+
+            {# Contact #}
+            <div class="footer-contact">
+
+                <h3>Contact</h3>
+
+                <p>14 rue des Carrières, 76000 Rouen</p>
+                <p>02 35 00 00 00</p>
+
+                <a href="{{ path(is_granted('ROLE_ADMIN') ? 'app_admin' : 'app_nouvelle_demande') }}">
+                    Parlons de votre projet
+                </a>
+
+            </div>
+
+        </div>
+
+
+        {# Copyright #}
+        <div class="footer-bottom container">
+            <p>
+                © {{ "now"|date("Y") }} AQUARTZ – TERRASSEMENT.
+                Tous droits réservés.
+            </p>
+        </div>
+
+    </footer>
+
+</body>
+</html>

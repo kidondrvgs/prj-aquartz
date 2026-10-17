@@ -1,0 +1,73 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Demandes clients - AQUARTZ{% endblock %}
+{% block rubrique %}Demandes{% endblock %}
+{% block titre %}Demandes clients{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin-demandes.css') }}">
+{% endblock %}
+
+{% block contenu %}
+    <div class="filters">
+        <a href="{{ path('app_admin_demandes') }}" class="filter-chip {{ statut == '' ? 'active' }}">Toutes ({{ total }})</a>
+        {% for filtre in statuts %}
+            <a href="{{ path('app_admin_demandes', {statut: filtre}) }}" class="filter-chip {{ statut == filtre ? 'active' }}">{{ filtre }}</a>
+        {% endfor %}
+    </div>
+    <div class="admin-demandes">
+        <div class="admin-liste">
+            {% for ligne in demandes %}
+                <a class="admin-ligne {{ demande and demande.id == ligne.id ? 'selectionnee' }}" href="{{ path('app_admin_demande', {id: ligne.id, statut: statut}) }}">
+                    <span>#D-{{ '%04d'|format(ligne.id) }} · {{ ligne.firstName }} {{ ligne.lastName }}</span>
+                    {% include 'demande/badge_statut.html.twig' with {statut: ligne.status} %}
+                </a>
+            {% else %}
+                <p class="admin-card">Aucune demande pour ce statut.</p>
+            {% endfor %}
+        </div>
+        {% if demande %}
+            <div class="admin-card">
+                <h2>Demande #D-{{ '%04d'|format(demande.id) }}</h2>
+                <dl class="admin-infos">
+                    <dt>Client</dt>
+                    <dd>{{ demande.firstName }} {{ demande.lastName }} · {{ demande.email }}</dd>
+                    <dt>Prestations</dt>
+                    <dd>
+                        {% for service in demande.services %}
+                            {{ service.title }}{{ not loop.last ? ', ' }}
+                        {% endfor %}
+                    </dd>
+                    <dt>Date souhaitée</dt>
+                    <dd>{{ demande.dateRequest|date('d/m/Y') }}</dd>
+                    <dt>Adresse</dt>
+                    <dd>{{ demande.location }}</dd>
+                    <dt>Surface</dt>
+                    <dd>{{ demande.surface }} m²</dd>
+                    <dt>Total estimatif</dt>
+                    <dd>
+                        {% if demande.montantEstime is not null %}
+                            {{ (demande.montantEstime / 100)|number_format(2, ',', ' ') }} €
+                        {% else %}
+                            Sur devis
+                        {% endif %}
+                    </dd>
+                </dl>
+                <h3>Description du client</h3>
+                <p class="admin-description">{{ demande.description|nl2br }}</p>
+                {{ form_start(form, {attr: {class: 'admin-form', novalidate: 'novalidate'}}) }}
+                    {{ form_errors(form) }}
+                    <div class="field">
+                        {{ form_row(form.status) }}
+                    </div>
+                    <div class="field">
+                        {{ form_row(form.reponse) }}
+                    </div>
+                    <p>La réponse enregistrée sera visible dans les demandes du client.</p>
+                    <button class="btn btn-yellow" type="submit">Enregistrer la réponse et le statut</button>
+                {{ form_end(form) }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

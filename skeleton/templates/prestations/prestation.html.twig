@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos prestations - AQUARTZ Terrassement{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/prestations.css') }}">
+{% endblock %}
+
+{% block body %}
+
+    <section class="page-header">
+        <p class="breadcrumb"><a href="{{ path('app_accueil') }}">Accueil</a>  /  Prestations</p>
+        <h1>Nos prestations</h1>
+        <p>Tarifs indicatifs de démonstration, par forfait. Le prix définitif sera confirmé par devis.</p>
+        <p>Choisissez la prestation qui correspond à votre chantier, puis lancez votre demande en quelques clics.</p>
+    </section>
+
+    <section class="prestations-list">
+        <div class="prestations-grid">
+
+            {# Une carte par prestation de la BDD #}
+            {# L'image a le même nom que le slug #}
+            {% for prestation in prestations %}
+                <article class="card">
+                    <div class="card-image">
+                        <img src="{{ asset('images/' ~ (prestation.images[0] ?? prestation.slug ~ '.jpg')) }}" alt="{{ prestation.title }}" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <h3>{{ prestation.title }}</h3>
+                        <p>{{ prestation.description }}</p>
+                        {% include 'prestations/prix.html.twig' %}
+                        {# On envoie l'id de la prestation au formulaire #}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('app_admin_prestation_modifier', {id: prestation.id}) }}" class="btn btn-yellow">Modifier</a>
+                        {% else %}
+                            <a href="{{ path('app_nouvelle_demande', {prestation: prestation.id}) }}" class="btn btn-yellow">Faire une demande</a>
+                        {% endif %}
+                    </div>
+                </article>
+            {% endfor %}
+
+        </div>
+    </section>
+
+{% endblock %}

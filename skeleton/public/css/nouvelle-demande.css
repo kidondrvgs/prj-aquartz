@@ -1,0 +1,166 @@
+/* ========================================
+   PAGE NOUVELLE DEMANDE
+======================================== */
+
+.demande-section {
+    background: var(--beige);
+    padding: 0 80px 72px;
+}
+
+
+/* ========================================
+   2 COLONNES : FORMULAIRE + ENCADRE NOIR
+======================================== */
+
+.demande-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+
+/* ========================================
+   CARTE BLANCHE DU FORMULAIRE
+======================================== */
+
+.demande-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.demande-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.prestations-selecteur {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.prestations-selecteur summary {
+    padding: 10px 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.prestations-selecteur summary:focus-visible {
+    outline: 2px solid var(--yellow);
+}
+
+.prestations-choix {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+    gap: 8px 12px;
+    max-height: 160px;
+    overflow-y: auto;
+    padding: 8px 12px 12px;
+}
+
+.prestation-choix {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    align-items: start;
+    gap: 2px 8px;
+}
+
+.prestation-choix input {
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    flex-shrink: 0;
+    accent-color: var(--brown);
+}
+
+.prestation-choix label {
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.choix-prix {
+    grid-column: 2;
+    font-size: 12px;
+    color: var(--brown);
+}
+
+.demande-total {
+    padding: 16px;
+    background: var(--beige);
+    border-radius: 8px;
+}
+
+.demande-total p {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+
+/* Messages d'erreur sous les champs */
+.field ul {
+    list-style: none;
+    font-size: 13px;
+    color: #8a1c12;
+}
+
+
+/* ========================================
+   COMMENT CA MARCHE
+======================================== */
+
+.demande-help {
+    background: var(--black);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.demande-help h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.help-steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.help-steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+}
+
+/* Rond jaune avec le numéro */
+.step-number {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--yellow);
+    color: var(--black);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 960px) {
+    .demande-section { padding-left: 32px; padding-right: 32px; }
+    .demande-grid { grid-template-columns: 1fr; }
+}
